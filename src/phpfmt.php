@@ -2,6 +2,9 @@
 
 namespace Fmt;
 
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\StreamOutput;
+
 define('VERSION', '19.7.3');
 
 require __DIR__ . '/../vendor/autoload.php';
