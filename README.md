@@ -1,10 +1,18 @@
 # phpfmt
 
-The **phpfmt** project was busted and development got stagnated in 2016. This is a fork aimed at continuing the development of **phpfmt**.
+The **phpfmt** project went _closed source_ on June 13, 2016 [Source](https://news.ycombinator.com/item?id=11896851).
+
+As the code had BSD license, someone forked it and kept it working, without updating it. And the source got lost. This is the result of extracting a phar file. And many changes.
 
 ## What Is It ?
 
 **phpfmt** formats PHP code by making it readable and following a specific coding guideline.
+
+## Before it is considered stable
+- Finish cleaning up _phpfmt.php_.
+- Migrate to some console package.
+- Check if compiling to phar is needed and automate it.
+- _tests, tests, tests_.
 
 ## Requires
 
@@ -13,7 +21,7 @@ The **phpfmt** project was busted and development got stagnated in 2016. This is
 ## Usage
 
 ```
-php phpfmt.phar <arguments>
+php src/phpfmt.php <args>
 ```
 
 ## Arguments
