@@ -172,6 +172,56 @@ abstract class BaseCodeFormatter
 
     public function __construct()
     {
+        // what do we do with this shit?
+        define('ST_AT', '@');
+        define('ST_BRACKET_CLOSE', ']');
+        define('ST_BRACKET_OPEN', '[');
+        define('ST_COLON', ':');
+        define('ST_COMMA', ',');
+        define('ST_CONCAT', '.');
+        define('ST_CURLY_CLOSE', '}');
+        define('ST_CURLY_OPEN', '{');
+        define('ST_DIVIDE', '/');
+        define('ST_DOLLAR', '$');
+        define('ST_EQUAL', '=');
+        define('ST_EXCLAMATION', '!');
+        define('ST_IS_GREATER', '>');
+        define('ST_IS_SMALLER', '<');
+        define('ST_MINUS', '-');
+        define('ST_MODULUS', '%');
+        define('ST_PARENTHESES_CLOSE', ')');
+        define('ST_PARENTHESES_OPEN', '(');
+        define('ST_PLUS', '+');
+        define('ST_QUESTION', '?');
+        define('ST_QUOTE', '"');
+        define('ST_REFERENCE', '&');
+        define('ST_SEMI_COLON', ';');
+        define('ST_TIMES', '*');
+        define('ST_BITWISE_OR', '|');
+        define('ST_BITWISE_XOR', '^');
+        if (!defined('T_POW')) {
+            define('T_POW', '**');
+        }
+        if (!defined('T_POW_EQUAL')) {
+            define('T_POW_EQUAL', '**=');
+        }
+        if (!defined('T_YIELD')) {
+            define('T_YIELD', 'yield');
+        }
+        if (!defined('T_FINALLY')) {
+            define('T_FINALLY', 'finally');
+        }
+        if (!defined('T_SPACESHIP')) {
+            define('T_SPACESHIP', '<=>');
+        }
+        if (!defined('T_COALESCE')) {
+            define('T_COALESCE', '??');
+        }
+
+        define('ST_PARENTHESES_BLOCK', 'ST_PARENTHESES_BLOCK');
+        define('ST_BRACKET_BLOCK', 'ST_BRACKET_BLOCK');
+        define('ST_CURLY_BLOCK', 'ST_CURLY_BLOCK');
+
         $this->passes['AddMissingCurlyBraces'] = new AddMissingCurlyBraces();
         $this->passes['EliminateDuplicatedEmptyLines'] = new EliminateDuplicatedEmptyLines();
         $this->passes['ExtraCommaInArray'] = new ExtraCommaInArray();
@@ -214,10 +264,10 @@ abstract class BaseCodeFormatter
 
         if (!class_exists($pass)) {
             sprintf("Class doesn't exist: $pass");
-            // $passName = sprintf('ExternalPass%s', $pass);
-            // $passes = array_reverse($this->passes, true);
-            // $passes[$passName] = new ExternalPass($pass);
-            // $this->passes = array_reverse($passes, true);
+            $passName = sprintf('ExternalPass%s', $pass);
+            $passes = array_reverse($this->passes, true);
+            $passes[$passName] = new ExternalPass($pass);
+            $this->passes = array_reverse($passes, true);
 
             return;
         }

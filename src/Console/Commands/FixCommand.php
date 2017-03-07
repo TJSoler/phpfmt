@@ -2,10 +2,11 @@
 
 namespace Fmt\Console\Commands;
 
+use Fmt\CodeFormatter;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FixCommand extends Command
@@ -22,7 +23,7 @@ class FixCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('fix')
+            ->setName(' ')
             ->setDefinition([
                 // arguments
                 new InputArgument(
@@ -200,6 +201,13 @@ class FixCommand extends Command
 			    	'Yoda style comparisons.'
 			    ), 
 
+			    new InputOption(
+                	'interactive',
+                	'i',
+                	InputOption::VALUE_NONE,
+                	'Start phpfmt interactive.'
+                ),
+
 			    // '-o=file' => 'output the formatted code to "file"',
 			    // '-o=-' => 'output the formatted code to standard output',
 			    New InputOption(
@@ -215,6 +223,17 @@ class FixCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+    	$fmt = new CodeFormatter();
+
+    	// do something with all the friking options this app has....
+    	
+
+    	foreach ($input->getArgument('path') as $file) {
+    		$output->writeln("<info>Formatting $file</info>");
+    		echo $fmt->formatCode(file_get_contents($file));
+    	}
+    	
+
         $output->writeln("<error>Not implemented</error>");
         return 1;
     }

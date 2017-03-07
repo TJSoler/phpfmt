@@ -11,13 +11,13 @@ class Application extends BaseApplication
 
 	public function __construct()
 	{
-		parent::__construct('PHP CS Fixer', self::VERSION);
-		
-		// $this->add(new DescribeCommand());
+		parent::__construct('PHPFMT', self::VERSION);
+
         $this->add(new FixCommand());
-        $this->setDefaultCommand('fix', true);
-        // $this->add(new ReadmeCommand());
-        // $this->add(new SelfUpdateCommand());
+        $this->setDefaultCommand(' ', true);
+        //$fixCommand = $this->find('fix');
+
+        
 	}
 
 	public function getLongVersion()
