@@ -11,13 +11,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FixCommand extends Command
 {
+    protected $files = [];
+    protected $input;
+    protected $output;
+
     public function __construct()
     {
         parent::__construct();
-        // $this->defaultConfig = new Config();
-        // $this->errorsManager = new ErrorsManager();
-        // $this->eventDispatcher = new EventDispatcher();
-        // $this->stopwatch = new Stopwatch();
     }
 
     protected function configure()
@@ -223,18 +223,51 @@ class FixCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	$fmt = new CodeFormatter();
+    	$this->input = $input;
+        $this->output = $output;
 
-    	// do something with all the friking options this app has....
-    	
+        $fmt = new CodeFormatter();
 
-    	foreach ($input->getArgument('path') as $file) {
-    		$output->writeln("<info>Formatting $file</info>");
-    		echo $fmt->formatCode(file_get_contents($file));
-    	}
-    	
+    	// $this->processOptions();
+ 	
+        $this->processArguments();
+
+        foreach ($this->files as $file) {
+            dump(file_get_contents($file[0]));
+
+        }
 
         $output->writeln("<error>Not implemented</error>");
         return 1;
+    }
+
+    protected function processArguments() 
+    {
+        foreach ($this->input->getArgument('path') as $arg) {
+            if (is_dir($arg)) {
+                return $this->processDir($arg);
+            }
+
+            if (file_exists($arg)) {
+                return $this->processFile($arg);
+            }
+
+            $this->output->writeln("<error>$arg is not a file or a folder.</error>");
+        }
+    }
+
+    protected function processDir($dir)
+    {
+        $dir = new \RecursiveDirectoryIterator($dir);
+        $it = new \RecursiveIteratorIterator($dir);
+        $files = new \RegexIterator($it, '/^.+\.php$/i', \RecursiveRegexIterator::GET_MATCH);
+        
+        $this->files = array_merge($this->files, iterator_to_array($files));
+        
+    }
+    protected function processFile($file)
+    {
+        // check if file is php first?
+        $this->files[] = $file;
     }
 }

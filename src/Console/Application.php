@@ -2,6 +2,7 @@
 
 namespace Fmt\Console;
 
+
 use Fmt\Console\Commands\FixCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 
@@ -15,9 +16,8 @@ class Application extends BaseApplication
 
         $this->add(new FixCommand());
         $this->setDefaultCommand(' ', true);
-        //$fixCommand = $this->find('fix');
-
         
+        // is there a way to show the help if no arguments are found?        
 	}
 
 	public function getLongVersion()
