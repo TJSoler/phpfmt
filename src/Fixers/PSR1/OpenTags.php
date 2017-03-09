@@ -1,13 +1,20 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR1;
 
-final class PSR1OpenTags extends FormatterPass
+use Fmt\Fixers\FixerInterface;
+use Fmt\FormatterPass;
+
+/**
+ * Files MUST use only <?php and <?= tags.
+ */
+class OpenTags extends FormatterPass implements FixerInterface
 {
-    public function candidate($source, $foundTokens)
+    public function fix($source): string
     {
-        return true;
+        return $this->format($source);
     }
+
     public function format($source)
     {
         $this->tkns = token_get_all($source);

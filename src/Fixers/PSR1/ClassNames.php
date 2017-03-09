@@ -1,8 +1,14 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR1;
 
-final class PSR1ClassNames extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+/**
+ * Class names MUST be declared in StudlyCaps.
+ */
+class ClassNames extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
@@ -11,14 +17,18 @@ final class PSR1ClassNames extends FormatterPass
         }
         return false;
     }
+    
     public function format($source)
     {
         $this->tkns = token_get_all($source);
         $this->code = '';
+
         $foundClass = false;
+
         while (list($index, $token) = each($this->tkns)) {
             list($id, $text) = $this->getToken($token);
             $this->ptr = $index;
+
             switch ($id) {
                 case T_CLASS:
                     if (!$this->leftUsefulTokenIs(T_DOUBLE_COLON)) {
@@ -42,6 +52,7 @@ final class PSR1ClassNames extends FormatterPass
                     break;
             }
         }
+
         return $this->code;
     }
 }

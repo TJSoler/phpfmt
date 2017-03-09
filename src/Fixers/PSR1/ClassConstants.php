@@ -1,8 +1,14 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR1;
 
-final class PSR1ClassConstants extends FormatterPass
+use Fmt\Fixers\FixerInterface;
+use Fmt\FormatterPass;
+
+/**
+ * Class constants MUST be declared in all upper case with underscore separators.
+ */
+class ClassConstants extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {

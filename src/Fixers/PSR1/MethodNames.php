@@ -1,8 +1,14 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR1;
 
-final class PSR1MethodNames extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+/**
+ * Method names MUST be declared in camelCase.
+ */
+class MethodNames extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
@@ -16,8 +22,10 @@ final class PSR1MethodNames extends FormatterPass
     {
         $this->tkns = token_get_all($source);
         $this->code = '';
+        
         $foundMethod = false;
         $methodReplaceList = [];
+
         while (list($index, $token) = each($this->tkns)) {
             list($id, $text) = $this->getToken($token);
             $this->ptr = $index;
@@ -46,6 +54,7 @@ final class PSR1MethodNames extends FormatterPass
                     break;
             }
         }
+        
         $this->tkns = token_get_all($this->code);
         $this->code = '';
         while (list($index, $token) = each($this->tkns)) {

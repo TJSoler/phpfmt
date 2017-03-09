@@ -255,6 +255,20 @@ abstract class BaseCodeFormatter
         $this->passes[$pass] = null;
     }
 
+    /**
+     * Overrides the default configuration with the configuration
+     * passed to the command from the command line. This should
+     * override even if whe have selected psr2 with 4 spaces
+     *
+     * @param      array  $options  The options
+     */
+    public function configure($options)
+    {
+        foreach ($options as $option => $value) {
+            $this->options[$option] = $value;
+        }
+    }
+
     public function enablePass($pass)
     {
         $args = func_get_args();

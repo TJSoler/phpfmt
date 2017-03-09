@@ -696,6 +696,7 @@ function getOptions($inPhar)
                     sizeof(iterator_to_array($files))
                 );
                 $progress->start();
+                
                 foreach ($files as $file) {
                     $progress->advance();
                     $file = $file[0];

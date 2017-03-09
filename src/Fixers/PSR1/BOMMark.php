@@ -1,8 +1,14 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR1;
 
-final class PSR1BOMMark extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+/**
+ * PHP code MUST use only UTF-8 without BOM.
+ */
+class BOMMark extends FormatterPass implements FixerInterface
 {
     const BOM = "\xef\xbb\xbf";
 

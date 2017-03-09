@@ -228,28 +228,39 @@ class FixCommand extends Command
 
         $fmt = new CodeFormatter();
 
-    	// $this->processOptions();
- 	
+        $fmt->configure($this->input->getOptions());
+
         $this->processArguments();
 
         foreach ($this->files as $file) {
-            dump(file_get_contents($file[0]));
-
+            // $fmt->formatCode($file);
         }
 
-        $output->writeln("<error>Not implemented</error>");
         return 1;
+    }
+
+    protected function processOptions()
+    {
+        
     }
 
     protected function processArguments() 
     {
+        dump($this->input->getArguments());
         foreach ($this->input->getArgument('path') as $arg) {
+            if ($arg == '.') {
+                $this->processDir(BASEPATH);
+                continue;
+            }
+
             if (is_dir($arg)) {
-                return $this->processDir($arg);
+                $this->processDir($arg);
+                continue;
             }
 
             if (file_exists($arg)) {
-                return $this->processFile($arg);
+                $this->processFile($arg);
+                continue;
             }
 
             $this->output->writeln("<error>$arg is not a file or a folder.</error>");
@@ -258,16 +269,15 @@ class FixCommand extends Command
 
     protected function processDir($dir)
     {
-        $dir = new \RecursiveDirectoryIterator($dir);
-        $it = new \RecursiveIteratorIterator($dir);
-        $files = new \RegexIterator($it, '/^.+\.php$/i', \RecursiveRegexIterator::GET_MATCH);
-        
-        $this->files = array_merge($this->files, iterator_to_array($files));
-        
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir));
+        $files = new \RegexIterator($iterator, '/^.+\.php$/i', \RecursiveRegexIterator::GET_MATCH);
+
+        $this->files = array_merge($this->files, array_keys(iterator_to_array($files)));
     }
+    
     protected function processFile($file)
     {
-        // check if file is php first?
+        // Check if file is php first?
         $this->files[] = $file;
     }
 }
