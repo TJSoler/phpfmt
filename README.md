@@ -8,27 +8,35 @@ As the code had BSD license, someone forked it and kept it working, without upda
 
 **phpfmt** formats PHP code by making it readable and following a specific coding guideline.
 
+## TODO:
+- Move help from the actual fixer class to a FixerHelp class?
+- Move the `--help-pass` option to a new `help` subcommand? `phpfmt help OrderAndRemoveUseClauses`
+
 ## Before it is considered stable
 - Finish cleaning up _phpfmt.php_.
 - Migrate to some console package.
 - Check if compiling to phar is needed and automate it.
 - _tests, tests, tests_.
 
-## Requires
-
-* PHP 7.0 or newer
-
 ## Usage
 
 ```
-php src/phpfmt.php <args>
+php phpfmt <opt> <args>
+```
+
+## Example
+
+```bash
+php phpfmt --psr2 --exclude=OrderAndRemoveUseClauses src/
 ```
 
 ## Arguments
+As many file or folders as you want.
+
+## Options
 
 | Argument | Description |
 | -------- | ----------- |
-| --cache[=FILENAME] | cache file. Default: .php.tools.cache |
 | --cakephp | Apply CakePHP coding style |
 | --config=FILENAME | configuration file. Default: .phpfmt.ini |
 | --constructor=type | analyse classes for attributes and generate constructor - camel, snake, golang |
