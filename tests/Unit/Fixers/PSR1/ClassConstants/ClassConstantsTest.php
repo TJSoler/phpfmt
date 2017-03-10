@@ -9,8 +9,8 @@ class ClassConstantsTest extends FixerUnitTestCase
 {
     public function testCandidate()
     {
-        $sourceTrue = $this->getSource(__DIR__ . '\fileWithConstants.php');
-        $sourceFalse = $this->getSource(__DIR__ . '\fileWithoutConstants.php');
+        $sourceTrue = $this->getSource(__DIR__ . '/fileWithConstants.php');
+        $sourceFalse = $this->getSource(__DIR__ . '/fileWithoutConstants.php');
        
         $tokensSourceTrue = $this->getTokens($sourceTrue);
         $tokensSourceFalse = $this->getTokens($sourceFalse);
@@ -23,8 +23,8 @@ class ClassConstantsTest extends FixerUnitTestCase
 
     public function testFormat()
     {
-        $source = $this->getSource(__DIR__ . '\fileWithConstants.php');
-        $expected = $this->getSource(__DIR__ . '\expectedResult.php');
+        $source = $this->getSource(__DIR__ . '/fileWithConstants.php');
+        $expected = $this->getSource(__DIR__ . '/expectedResult.php');
 
         $class = new ClassConstants;
         $fixedSource = $class->format($source);

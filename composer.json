@@ -15,13 +15,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Fmt\\Tests\\": "tests/"
+            "Fmt\\Tests\\": "./tests/"
         }
     },
-    "require": {
-        "illuminate/support": "^5.4"
-    },
     "require-dev": {
+        "illuminate/support": "^5.4",
         "phpunit/phpunit": "^6.0",
         "symfony/console": "^3.2",
         "symfony/var-dumper": "^3.2"

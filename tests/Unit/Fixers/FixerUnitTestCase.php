@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class FixerUnitTestCase extends TestCase
 {
-
     protected function getSource($file)
     {
         return file_get_contents($file);

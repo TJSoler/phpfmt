@@ -9,8 +9,8 @@ class BOMMarkTest extends FixerUnitTestCase
 {
     public function testCandidate()
     {
-        $sourceTrue = $this->getSource(__DIR__ . '\fileWithBOM.php');
-        $sourceFalse = $this->getSource(__DIR__ . '\expectedResult.php');
+        $sourceTrue = $this->getSource(__DIR__ . DIRECTORY_SEPARATOR . 'fileWithBOM.php');
+        $sourceFalse = $this->getSource(__DIR__ . DIRECTORY_SEPARATOR . 'expectedResult.php');
 
         $class = new BOMMark;
         $this->assertTrue($class->candidate($sourceTrue, null));
@@ -19,8 +19,8 @@ class BOMMarkTest extends FixerUnitTestCase
 
     public function testFormat()
     {
-        $source = $this->getSource(__DIR__ . '\fileWithBOM.php');
-        $expected = $this->getSource(__DIR__ . '\expectedResult.php');
+        $source = $this->getSource(__DIR__ . '/fileWithBOM.php');
+        $expected = $this->getSource(__DIR__ . '/expectedResult.php');
 
         $class = new BOMMark;
         $fixedSource = $class->format($source);
