@@ -12,7 +12,7 @@ class ClassNames extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
-        if (isset($foundTokens[T_CLASS]) || isset($foundTokens[T_STRING])) {
+        if (isset($foundTokens[T_CLASS])) {
             return true;
         }
         return false;
