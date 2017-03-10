@@ -28,7 +28,6 @@ class FixerUnitTestCase extends TestCase
         $commentStack = [];
         $tkns = token_get_all($source);
         foreach ($tkns as $token) {
-
             list($id, $text) = $this->getToken($token);
             $foundTokens[$id] = $id;
             if (T_COMMENT === $id) {
