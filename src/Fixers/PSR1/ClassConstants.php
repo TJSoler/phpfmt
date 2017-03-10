@@ -12,7 +12,7 @@ class ClassConstants extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
-        if (isset($foundTokens[T_CONST]) || isset($foundTokens[T_STRING])) {
+        if (isset($foundTokens[T_CONST])) {
             return true;
         }
         return false;
