@@ -173,32 +173,84 @@ abstract class BaseCodeFormatter
     public function __construct()
     {
         // what do we do with this shit?
-        define('ST_AT', '@');
-        define('ST_BRACKET_CLOSE', ']');
-        define('ST_BRACKET_OPEN', '[');
-        define('ST_COLON', ':');
-        define('ST_COMMA', ',');
-        define('ST_CONCAT', '.');
-        define('ST_CURLY_CLOSE', '}');
-        define('ST_CURLY_OPEN', '{');
-        define('ST_DIVIDE', '/');
-        define('ST_DOLLAR', '$');
-        define('ST_EQUAL', '=');
-        define('ST_EXCLAMATION', '!');
-        define('ST_IS_GREATER', '>');
-        define('ST_IS_SMALLER', '<');
-        define('ST_MINUS', '-');
-        define('ST_MODULUS', '%');
-        define('ST_PARENTHESES_CLOSE', ')');
-        define('ST_PARENTHESES_OPEN', '(');
-        define('ST_PLUS', '+');
-        define('ST_QUESTION', '?');
-        define('ST_QUOTE', '"');
-        define('ST_REFERENCE', '&');
-        define('ST_SEMI_COLON', ';');
-        define('ST_TIMES', '*');
-        define('ST_BITWISE_OR', '|');
-        define('ST_BITWISE_XOR', '^');
+        if (! defined('ST_AT')) {
+            define('ST_AT', '@');
+        }
+        if (! defined('ST_BRACKET_CLOSE')) {
+            define('ST_BRACKET_CLOSE', ']');
+        }
+        if (! defined('ST_BRACKET_OPEN')) {
+            define('ST_BRACKET_OPEN', '[');
+        }
+        if (! defined('ST_COLON')) {
+            define('ST_COLON', ':');
+        }
+        if (! defined('ST_COMMA')) {
+            define('ST_COMMA', ',');
+        }
+        if (! defined('ST_CONCAT')) {
+            define('ST_CONCAT', '.');
+        }
+        if (! defined('ST_CURLY_CLOSE')) {
+            define('ST_CURLY_CLOSE', '}');
+        }
+        if (! defined('ST_CURLY_OPEN')) {
+            define('ST_CURLY_OPEN', '{');
+        }
+        if (! defined('ST_DIVIDE')) {
+            define('ST_DIVIDE', '/');
+        }
+        if (! defined('ST_DOLLAR')) {
+            define('ST_DOLLAR', '$');
+        }
+        if (! defined('ST_EQUAL')) {
+            define('ST_EQUAL', '=');
+        }
+        if (! defined('ST_EXCLAMATION')) {
+            define('ST_EXCLAMATION', '!');
+        }
+        if (! defined('ST_IS_GREATER')) {
+            define('ST_IS_GREATER', '>');
+        }
+        if (! defined('ST_IS_SMALLER')) {
+            define('ST_IS_SMALLER', '<');
+        }
+        if (! defined('ST_MINUS')) {
+            define('ST_MINUS', '-');
+        }
+        if (! defined('ST_MODULUS')) {
+            define('ST_MODULUS', '%');
+        }
+        if (! defined('ST_PARENTHESES_CLOSE')) {
+            define('ST_PARENTHESES_CLOSE', ')');
+        }
+        if (! defined('ST_PARENTHESES_OPEN')) {
+            define('ST_PARENTHESES_OPEN', '(');
+        }
+        if (! defined('ST_PLUS')) {
+            define('ST_PLUS', '+');
+        }
+        if (! defined('ST_QUESTION')) {
+            define('ST_QUESTION', '?');
+        }
+        if (! defined('ST_QUOTE')) {
+            define('ST_QUOTE', '"');
+        }
+        if (! defined('ST_REFERENCE')) {
+            define('ST_REFERENCE', '&');
+        }
+        if (! defined('ST_SEMI_COLON')) {
+            define('ST_SEMI_COLON', ';');
+        }
+        if (! defined('ST_TIMES')) {
+            define('ST_TIMES', '*');
+        }
+        if (! defined('ST_BITWISE_OR')) {
+            define('ST_BITWISE_OR', '|');
+        }
+        if (! defined('ST_BITWISE_XOR')) {
+            define('ST_BITWISE_XOR', '^');
+        }
         if (!defined('T_POW')) {
             define('T_POW', '**');
         }
@@ -221,6 +273,7 @@ abstract class BaseCodeFormatter
         define('ST_PARENTHESES_BLOCK', 'ST_PARENTHESES_BLOCK');
         define('ST_BRACKET_BLOCK', 'ST_BRACKET_BLOCK');
         define('ST_CURLY_BLOCK', 'ST_CURLY_BLOCK');
+
 
         $this->passes['AddMissingCurlyBraces'] = new AddMissingCurlyBraces();
         $this->passes['EliminateDuplicatedEmptyLines'] = new EliminateDuplicatedEmptyLines();
