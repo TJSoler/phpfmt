@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/TJSoler/phpfmt.svg?branch=testing)](https://travis-ci.org/TJSoler/phpfmt)
 
+[![Coverage Status](https://coveralls.io/repos/github/TJSoler/phpfmt/badge.svg?branch=testing)](https://coveralls.io/github/TJSoler/phpfmt?branch=testing)
+
 The **phpfmt** project went _closed source_ on June 13, 2016 [Source](https://news.ycombinator.com/item?id=11896851).
 
 As the code had BSD license, someone forked it and kept it working, without updating it. And the source got lost. This is the result of extracting a phar file. And many changes.
