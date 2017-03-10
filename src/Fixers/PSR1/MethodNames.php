@@ -12,7 +12,7 @@ class MethodNames extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
-        if (isset($foundTokens[T_FUNCTION]) || isset($foundTokens[T_STRING]) || isset($foundTokens[ST_PARENTHESES_OPEN])) {
+        if (isset($foundTokens[T_FUNCTION])) {
             return true;
         }
         return false;
@@ -47,7 +47,7 @@ class MethodNames extends FormatterPass implements FixerInterface
                         $foundMethod = false;
                         break;
                     }
-                case ST_PARENTHESES_OPEN:
+                case '(':
                     $foundMethod = false;
                 default:
                     $this->appendCode($text);
@@ -62,7 +62,7 @@ class MethodNames extends FormatterPass implements FixerInterface
             $this->ptr = $index;
             switch ($id) {
                 case T_STRING:
-                    if (isset($methodReplaceList[$text]) && $this->rightUsefulTokenIs(ST_PARENTHESES_OPEN)) {
+                    if (isset($methodReplaceList[$text]) && $this->rightUsefulTokenIs('(')) {
                         $this->appendCode($methodReplaceList[$text]);
                         break;
                     }

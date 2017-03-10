@@ -29,7 +29,7 @@ class ClassConstantsTest extends FixerUnitTestCase
         $class = new ClassConstants;
         $fixedSource = $class->format($source);
 
-        $this->assertFalse($source === $expected);
-        $this->assertTrue($fixedSource === $expected);
+        $this->assertFalse(strcmp($source, $expected) === 0);
+        $this->assertTrue(strcmp($fixedSource, $expected) === 0);
     }
 }

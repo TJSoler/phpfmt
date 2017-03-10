@@ -13,6 +13,7 @@ class BOMMarkTest extends FixerUnitTestCase
         $sourceFalse = $this->getSource(__DIR__ . DIRECTORY_SEPARATOR . 'expectedResult.php');
 
         $class = new BOMMark;
+        
         $this->assertTrue($class->candidate($sourceTrue, null));
         $this->assertFalse($class->candidate($sourceFalse, null));
     }
@@ -25,7 +26,7 @@ class BOMMarkTest extends FixerUnitTestCase
         $class = new BOMMark;
         $fixedSource = $class->format($source);
         
-        $this->assertFalse($source === $expected);
-        $this->assertTrue($fixedSource === $expected);
+        $this->assertFalse(strcmp($source, $expected) === 0);
+        $this->assertTrue(strcmp($fixedSource, $expected) === 0);
     }
 }
