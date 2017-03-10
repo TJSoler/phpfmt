@@ -11,9 +11,18 @@
          stopOnFailure="false"
          syntaxCheck="true"
          verbose="true">
-		<testsuites>
-				<testsuite name="PHPFMT Test Suite">
-						<directory suffix="Test.php">./tests</directory>
-				</testsuite>
-		</testsuites>
+      <testsuites>
+         <testsuite name="PHPFMT Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+         </testsuite>
+      </testsuites>
+      <filter>
+         <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+            <exclude>
+               <directory>./vendor</directory>
+               <directory>./tests</directory>
+            </exclude>
+         </whitelist>
+      </filter>
 </phpunit>
