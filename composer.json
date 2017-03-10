@@ -13,6 +13,11 @@
             "Fmt\\": "./src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Fmt\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "illuminate/support": "^5.4"
     },
