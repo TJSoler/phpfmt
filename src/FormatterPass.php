@@ -85,9 +85,9 @@ abstract class FormatterPass
         return $this->newLine;
     }
 
-    protected function getCrlfIndent()
+    protected function getCrlfIndent($increment = 0)
     {
-        return $this->getCrlf().$this->getIndent();
+        return $this->getCrlf() . $this->getIndent($increment);
     }
 
     protected function getIndent($increment = 0)

@@ -1,9 +1,17 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR2;
 
-final class PSR2CurlyOpenNextLine extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class CurlyOpenNextLine extends FormatterPass implements FixerInterface
 {
+    public function __construct()
+    {
+        $this->indentChar = " ";
+    }
+
     public function candidate($source, $foundTokens)
     {
         return true;
@@ -55,7 +63,7 @@ final class PSR2CurlyOpenNextLine extends FormatterPass
                                 $touchedLn = true;
                             }
                             if (ST_CURLY_OPEN === $id && !$touchedLn) {
-                                $this->appendCode($this->getCrlfIndent());
+                                $this->appendCode($this->getCrlfIndent(3));
                                 prev($this->tkns);
                                 break;
                             } elseif (ST_CURLY_OPEN === $id) {
