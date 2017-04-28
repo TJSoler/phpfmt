@@ -129,10 +129,36 @@ class KeywordsLowerCase extends FormatterPass implements FixerInterface
                 (
                     ('true' === $lcText || 'false' === $lcText || 'null' === $lcText) &&
                     !$this->leftUsefulTokenIs([
-                        T_NS_SEPARATOR, T_AS, T_CLASS, T_EXTENDS, T_IMPLEMENTS, T_INSTANCEOF, T_INTERFACE, T_NEW, T_NS_SEPARATOR, T_PAAMAYIM_NEKUDOTAYIM, T_USE, T_TRAIT, T_INSTEADOF, T_CONST,
+                        T_NS_SEPARATOR,
+                        T_AS,
+                        T_CLASS,
+                        T_EXTENDS,
+                        T_IMPLEMENTS,
+                        T_INSTANCEOF,
+                        T_INTERFACE,
+                        T_NEW,
+                        T_NS_SEPARATOR,
+                        T_PAAMAYIM_NEKUDOTAYIM,
+                        T_USE,
+                        T_TRAIT,
+                        T_INSTEADOF,
+                        T_CONST,
                     ]) &&
                     !$this->rightUsefulTokenIs([
-                        T_NS_SEPARATOR, T_AS, T_CLASS, T_EXTENDS, T_IMPLEMENTS, T_INSTANCEOF, T_INTERFACE, T_NEW, T_NS_SEPARATOR, T_PAAMAYIM_NEKUDOTAYIM, T_USE, T_TRAIT, T_INSTEADOF, T_CONST,
+                        T_NS_SEPARATOR,
+                        T_AS,
+                        T_CLASS,
+                        T_EXTENDS,
+                        T_IMPLEMENTS,
+                        T_INSTANCEOF,
+                        T_INTERFACE,
+                        T_NEW,
+                        T_NS_SEPARATOR,
+                        T_PAAMAYIM_NEKUDOTAYIM,
+                        T_USE,
+                        T_TRAIT,
+                        T_INSTEADOF,
+                        T_CONST,
                     ])
                 ) ||
                 in_array($lcText, static::$reservedWords)

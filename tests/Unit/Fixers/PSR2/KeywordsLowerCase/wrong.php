@@ -21,13 +21,11 @@ ABSTRACT CLASS SomethingHere {
                 // code...
                 break;
 
-            IF($this->testArray[1] == 'array') {
+            IF ($this->testArray[1] == 'array') {
                 DIE();
-            }
-            ELSEIF($this->testArray[1] != 'array') {
+            } ELSEIF ($this->testArray[1] != 'array') {
                 ECHO 'something';
-            }
-            ELSE {
+            } ELSE {
                 $this->something = CLONE $this->testArray;
             }
         }

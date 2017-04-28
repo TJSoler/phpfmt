@@ -16,7 +16,7 @@ abstract class SomethingHere {
             case 'an':
                 // do nothing, because this is only a test class...
                 break;
-            
+
             default:
                 // code...
                 break;

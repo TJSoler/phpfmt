@@ -8,6 +8,12 @@ The **phpfmt** project went _closed source_ on June 13, 2016 [Source](https://ne
 
 As the code had BSD license, someone forked it and kept it working, without updating it. And the source got lost. This is the result of extracting a phar file. And many changes.
 
+## This fork objectives:
+- 
+
+## This branch:
+This branch should be UP until every test is been written.
+
 ## What Is It ?
 
 **phpfmt** formats PHP code by making it readable and following a specific coding guideline.

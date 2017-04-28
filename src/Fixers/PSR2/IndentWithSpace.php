@@ -1,8 +1,11 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR2;
 
-final class PSR2IndentWithSpace extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class IndentWithSpace extends FormatterPass implements FixerInterface
 {
     private $size = 4;
 
