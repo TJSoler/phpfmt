@@ -26,8 +26,6 @@ class CurlyOpenNextLineTest extends FixerUnitTestCase
 
         $fixedSource = $class->format($source);
 
-        file_put_contents('fixedSource.php', $fixedSource);
-
         $this->assertFalse(strcmp($source, $expected) === 0);
         $this->assertTrue(strcmp($fixedSource, $expected) === 0);
     }
