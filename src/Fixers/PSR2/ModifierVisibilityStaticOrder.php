@@ -1,20 +1,22 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR2;
 
-final class PSR2ModifierVisibilityStaticOrder extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class ModifierVisibilityStaticOrder extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
-        return isset($foundTokens[T_VAR]) ||
-        isset($foundTokens[T_PUBLIC]) ||
-        isset($foundTokens[T_PRIVATE]) ||
-        isset($foundTokens[T_PROTECTED]) ||
-        isset($foundTokens[T_FINAL]) ||
-        isset($foundTokens[T_ABSTRACT]) ||
-        isset($foundTokens[T_STATIC]) ||
-        isset($foundTokens[T_CLASS])
-        ;
+        return  isset($foundTokens[T_VAR]) ||
+                isset($foundTokens[T_PUBLIC]) ||
+                isset($foundTokens[T_PRIVATE]) ||
+                isset($foundTokens[T_PROTECTED]) ||
+                isset($foundTokens[T_FINAL]) ||
+                isset($foundTokens[T_ABSTRACT]) ||
+                isset($foundTokens[T_STATIC]) ||
+                isset($foundTokens[T_CLASS]);
     }
 
     public function format($source)
