@@ -63,7 +63,7 @@ class CurlyOpenNextLine extends FormatterPass implements FixerInterface
                                 $touchedLn = true;
                             }
                             if (ST_CURLY_OPEN === $id && !$touchedLn) {
-                                $this->appendCode($this->getCrlfIndent(3));
+                                $this->appendCode($this->getCrlfIndent());
                                 prev($this->tkns);
                                 break;
                             } elseif (ST_CURLY_OPEN === $id) {

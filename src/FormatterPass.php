@@ -11,6 +11,9 @@ abstract class FormatterPass
     protected $ignoreFutileTokens = [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT];
 
     protected $indent = 0;
+    
+    // if we are using spaces, how many to indent a tab?
+    protected $indentBlock = 4;
 
     protected $indentChar = "\t";
 
@@ -85,9 +88,9 @@ abstract class FormatterPass
         return $this->newLine;
     }
 
-    protected function getCrlfIndent($increment = 0)
+    protected function getCrlfIndent()
     {
-        return $this->getCrlf() . $this->getIndent($increment);
+        return $this->getCrlf() . $this->getIndent();
     }
 
     protected function getIndent($increment = 0)
@@ -842,7 +845,11 @@ abstract class FormatterPass
 
     protected function setIndent($increment)
     {
+        if ($this->indentChar === " ") {
+            $increment = $this->indentBlock * $increment;
+        }
         $this->indent += $increment;
+        
         if ($this->indent < 0) {
             $this->indent = 0;
         }
