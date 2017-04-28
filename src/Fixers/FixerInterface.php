@@ -2,10 +2,10 @@
 
 namespace Fmt\Fixers;
 
-interface FixerInterface {
-
+interface FixerInterface
+{
     /**
-     * Accepts a string containing the source that 
+     * Accepts a string containing the source that
      * the fixer needs to fix.
      *
      * @param      string  $source  The source

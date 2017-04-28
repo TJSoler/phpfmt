@@ -1,8 +1,11 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers\PSR2;
 
-final class PSR2LnAfterNamespace extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class LnAfterNamespace extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
