@@ -2,6 +2,8 @@
 
 namespace Fmt;
 
+use Fmt\Fixers\AlignDoubleArrow;
+
 final class AlignGroupDoubleArrow extends AlignDoubleArrow
 {
     public function format($source)
