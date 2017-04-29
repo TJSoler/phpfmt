@@ -1,11 +1,13 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class AlignEquals extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class AlignEquals extends FormatterPass implements FixerInterface
 {
     const ALIGNABLE_EQUAL = "\x2 EQUAL%d \x3";
-
     const OPEN_TAG = "<?php /*\x2 EQUAL OPEN TAG\x3*/";
 
     public function candidate($source, $foundTokens)
@@ -69,28 +71,6 @@ final class AlignEquals extends AdditionalPass
         }
 
         $this->alignPlaceholders(self::ALIGNABLE_EQUAL, $contextCounter);
-
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Vertically align "=".';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<?php
-$a = 1;
-$bb = 22;
-$ccc = 333;
-
-$a   = 1;
-$bb  = 22;
-$ccc = 333;
-
-?>
-EOT;
     }
 }
