@@ -1,9 +1,17 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class StripNewlineWithinClassBody extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\LeftAlignComment;
+use Fmt\Fixers\FixerInterface;
+
+/**
+ * Strip empty lines after class opening curly brace.
+ */
+class StripNewlineWithinClassBody extends FormatterPass implements FixerInterface
 {
+    
     public function candidate($source, $foundTokens)
     {
         if (isset($foundTokens[T_CLASS]) || isset($foundTokens[T_TRAIT])) {
@@ -68,28 +76,5 @@ final class StripNewlineWithinClassBody extends AdditionalPass
         }
 
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Strip empty lines after class opening curly brace.';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<?php
-// From
-class A {
-
-    protected $a;
-
-}
-// To
-class A {
-    protected $a;
-}
-?>
-EOT;
     }
 }
