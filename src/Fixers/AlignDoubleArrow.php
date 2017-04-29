@@ -1,8 +1,11 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-class AlignDoubleArrow extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class AlignDoubleArrow extends FormatterPass implements FixerInterface
 {
     const ALIGNABLE_EQUAL = "\x2 EQUAL%d.%d.%d \x3";
 
@@ -105,31 +108,7 @@ class AlignDoubleArrow extends AdditionalPass
 
         return $this->code;
     }
-
-    public function getDescription()
-    {
-        return 'Vertically align T_DOUBLE_ARROW (=>).';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<?php
-$a = [
-    1 => 1,
-    22 => 22,
-    333 => 333,
-];
-
-$a = [
-    1   => 1,
-    22  => 22,
-    333 => 333,
-];
-?>
-EOT;
-    }
-
+    
     protected function align($maxContextCounter)
     {
         foreach ($maxContextCounter as $level => $entrances) {
