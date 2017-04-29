@@ -1,8 +1,14 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class AddMissingParentheses extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+/**
+ * Add extra parentheses in new instantiations.
+ */
+class AddMissingParentheses extends FormatterPass implements FixerInterface
 {
     public function candidate($source, $foundTokens)
     {
@@ -48,21 +54,5 @@ final class AddMissingParentheses extends AdditionalPass
         }
 
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Add extra parentheses in new instantiations.';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<?php
-$a = new SomeClass;
-
-$a = new SomeClass();
-?>
-EOT;
     }
 }
