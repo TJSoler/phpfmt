@@ -1,8 +1,12 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class AlignDoubleSlashComments extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\LeftAlignComment;
+use Fmt\Fixers\FixerInterface;
+
+class AlignDoubleSlashComments extends FormatterPass implements FixerInterface
 {
     const ALIGNABLE_COMMENT = "\x2 COMMENT%d \x3";
 
@@ -59,28 +63,5 @@ final class AlignDoubleSlashComments extends AdditionalPass
         $this->alignPlaceholders(self::ALIGNABLE_COMMENT, $contextCounter);
 
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Vertically align "//" comments.';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<?php
-//From:
-$a = 1; // Comment 1
-$bb = 22;  // Comment 2
-$ccc = 333;  // Comment 3
-
-//To:
-$a = 1;      // Comment 1
-$bb = 22;    // Comment 2
-$ccc = 333;  // Comment 3
-
-?>
-EOT;
     }
 }
