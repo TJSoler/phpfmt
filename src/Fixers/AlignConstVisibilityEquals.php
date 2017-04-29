@@ -1,11 +1,13 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class AlignConstVisibilityEquals extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class AlignConstVisibilityEquals extends FormatterPass implements FixerInterface
 {
     const ALIGNABLE_EQUAL = "\x2 EQUAL%d \x3";
-
     const OPEN_TAG = "<?php /*\x2 EQUAL OPEN TAG\x3*/";
 
     public function candidate($source, $foundTokens)
@@ -85,30 +87,5 @@ final class AlignConstVisibilityEquals extends AdditionalPass
         $this->alignPlaceholders(self::ALIGNABLE_EQUAL, $contextCounter);
 
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Vertically align "=" of visibility and const blocks.';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<?php
-
-class A {
-    public $a = 1;
-    public $bb = 22;
-    public $ccc = 333;
-}
-
-class A {
-    public $a   = 1;
-    public $bb  = 22;
-    public $ccc = 333;
-}
-?>
-EOT;
     }
 }
