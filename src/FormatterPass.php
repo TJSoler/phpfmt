@@ -665,7 +665,11 @@ abstract class FormatterPass
     protected function refWalkUsefulUntil($tkns, &$ptr, $expectedId)
     {
         do {
-            $ptr = $this->walkRight($tkns, $ptr, $this->ignoreFutileTokens);
+            $ptr = $this->walkRight(
+                $tkns,
+                $ptr,
+                $this->ignoreFutileTokens
+            );
         } while ($expectedId != $tkns[$ptr][0]);
     }
 
@@ -1046,10 +1050,9 @@ abstract class FormatterPass
 
     private function walkLeft($tkns, $idx, $ignoreList)
     {
-        $i = $idx;
-        while (--$i >= 0 && isset($ignoreList[$tkns[$i][0]]));
-
-        return $i;
+        while (--$idx >= 0 && isset($ignoreList[$tkns[$idx][0]])) {
+            return $idx;
+        }
     }
 
     private function walkRight($tkns, $idx, $ignoreList)

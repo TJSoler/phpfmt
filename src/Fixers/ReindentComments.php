@@ -1,8 +1,12 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class ReindentComments extends FormatterPass
+use Fmt\FormatterPass;
+use Fmt\LeftAlignComment;
+use Fmt\Fixers\FixerInterface;
+
+class ReindentComments extends FormatterPass implements FixerInterface
 {
     public $commentStack = [];
 
@@ -25,6 +29,8 @@ final class ReindentComments extends FormatterPass
             $this->ptr = $index;
             $this->tkns[$this->ptr] = [$id, $text];
             if (T_COMMENT == $id) {
+                
+
                 if (LeftAlignComment::NON_INDENTABLE_COMMENT == $text) {
                     continue;
                 }
@@ -32,6 +38,7 @@ final class ReindentComments extends FormatterPass
                 $oldComment = current($this->commentStack);
                 next($this->commentStack);
                 if (substr($text, 0, 2) != '/*') {
+                    // this is a doble slash comment
                     continue;
                 }
 

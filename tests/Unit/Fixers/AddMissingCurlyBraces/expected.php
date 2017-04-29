@@ -6,6 +6,13 @@ class SomethingHere
 {
     public function __construct()
     {
-        // Something weird.
+        if ($something) {
+$anotherThing;
+}
+
+        else {
+$someOtherThing;
+}
+
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace Fmt\Tests\Unit\PSR2\SingleEmptyLineAndStripClosingTag;
+namespace Fmt\Tests\Unit\AddMissingCurlyBraces;
 
-use Fmt\Fixers\PSR2\SingleEmptyLineAndStripClosingTag;
+use Fmt\Fixers\AddMissingCurlyBraces;
 use Fmt\Tests\Unit\Fixers\FixerUnitTestCase;
 
-class SingleEmptyLineAndStripClosingTagTest extends FixerUnitTestCase
+class AddMissingCurlyBracesTest extends FixerUnitTestCase
 {
     public function testCandidate()
     {
         $sourceTrue = $this->getSource(__DIR__ . DIRECTORY_SEPARATOR . 'wrong.php');
         $tokensSourceTrue = $this->getTokens($sourceTrue);
 
-        $class = new SingleEmptyLineAndStripClosingTag;
+        $class = new AddMissingCurlyBraces;
 
         $this->assertTrue($class->candidate($sourceTrue, $tokensSourceTrue[0]));
     }
@@ -22,13 +22,9 @@ class SingleEmptyLineAndStripClosingTagTest extends FixerUnitTestCase
         $source = $this->getSource(__DIR__ . '/wrong.php');
         $expected = $this->getSource(__DIR__ . '/expected.php');
 
-        $class = new SingleEmptyLineAndStripClosingTag;
+        $class = new AddMissingCurlyBraces;
 
         $fixedSource = $class->format($source);
-
-        
-        file_put_contents(__DIR__ . 'fixedSource.php', $fixedSource);
-
 
         $this->assertFalse(strcmp($source, $expected) === 0);
         $this->assertTrue(strcmp($fixedSource, $expected) === 0);

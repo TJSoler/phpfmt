@@ -2,6 +2,9 @@
 
 namespace Fmt;
 
+use Fmt\Fixers\ReindentComments;
+use Fmt\Fixers\AddMissingCurlyBraces;
+
 abstract class BaseCodeFormatter
 {
     protected $passes = [
