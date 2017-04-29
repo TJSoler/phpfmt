@@ -26,10 +26,6 @@ class SingleEmptyLineAndStripClosingTagTest extends FixerUnitTestCase
 
         $fixedSource = $class->format($source);
 
-        
-        file_put_contents(__DIR__ . 'fixedSource.php', $fixedSource);
-
-
         $this->assertFalse(strcmp($source, $expected) === 0);
         $this->assertTrue(strcmp($fixedSource, $expected) === 0);
     }
