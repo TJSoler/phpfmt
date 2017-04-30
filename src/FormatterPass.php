@@ -11,6 +11,9 @@ abstract class FormatterPass
     protected $ignoreFutileTokens = [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT];
 
     protected $indent = 0;
+    
+    // if we are using spaces, how many to indent a tab?
+    protected $indentBlock = 4;
 
     protected $indentChar = "\t";
 
@@ -87,7 +90,7 @@ abstract class FormatterPass
 
     protected function getCrlfIndent()
     {
-        return $this->getCrlf().$this->getIndent();
+        return $this->getCrlf() . $this->getIndent();
     }
 
     protected function getIndent($increment = 0)
@@ -662,7 +665,11 @@ abstract class FormatterPass
     protected function refWalkUsefulUntil($tkns, &$ptr, $expectedId)
     {
         do {
-            $ptr = $this->walkRight($tkns, $ptr, $this->ignoreFutileTokens);
+            $ptr = $this->walkRight(
+                $tkns,
+                $ptr,
+                $this->ignoreFutileTokens
+            );
         } while ($expectedId != $tkns[$ptr][0]);
     }
 
@@ -842,7 +849,11 @@ abstract class FormatterPass
 
     protected function setIndent($increment)
     {
+        if ($this->indentChar === " ") {
+            $increment = $this->indentBlock * $increment;
+        }
         $this->indent += $increment;
+        
         if ($this->indent < 0) {
             $this->indent = 0;
         }
@@ -1039,10 +1050,9 @@ abstract class FormatterPass
 
     private function walkLeft($tkns, $idx, $ignoreList)
     {
-        $i = $idx;
-        while (--$i >= 0 && isset($ignoreList[$tkns[$i][0]]));
-
-        return $i;
+        while (--$idx >= 0 && isset($ignoreList[$tkns[$idx][0]])) {
+            return $idx;
+        }
     }
 
     private function walkRight($tkns, $idx, $ignoreList)

@@ -13,12 +13,18 @@
             "Fmt\\": "./src/"
         }
     },
-    "require": {
-        "illuminate/support": "^5.4"
+    "autoload-dev": {
+        "psr-4": {
+            "Fmt\\Tests\\": "./tests/"
+        }
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0",
+        "illuminate/support": "^5.4",
+        "phpunit/phpunit": "^6.1",
         "symfony/console": "^3.2",
-        "symfony/var-dumper": "^3.2"
+        "symfony/var-dumper": "^3.2",
+        "satooshi/php-coveralls": "^1.0",
+        "phpunit/php-code-coverage": "^5.0",
+        "sebastian/diff": "^1.4"
     }
 }

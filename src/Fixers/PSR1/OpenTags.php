@@ -10,11 +10,11 @@ use Fmt\FormatterPass;
  */
 class OpenTags extends FormatterPass implements FixerInterface
 {
-    public function fix($source): string
+    public function candidate($source, $tokens)
     {
-        return $this->format($source);
+        return true;
     }
-
+    
     public function format($source)
     {
         $this->tkns = token_get_all($source);
