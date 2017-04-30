@@ -1,8 +1,11 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class AlignPHPCode2 extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class AlignPHPCode2 extends FormatterPass implements FixerInterface
 {
     const PLACEHOLDER_STRING = "\x2 CONSTANT_STRING_%d \x3";
 
@@ -82,21 +85,5 @@ final class AlignPHPCode2 extends AdditionalPass
         }
 
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Align PHP code within opening and closing php block.';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<div>
-    <?php
-    echo $a;
-    ?>
-</div>
-EOT;
     }
 }

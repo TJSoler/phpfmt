@@ -1,11 +1,14 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-final class AlignPHPCode extends AdditionalPass
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
+
+class AlignPHPCode extends FormatterPass implements FixerInterface
 {
     const PLACEHOLDER_STRING = "\x2 CONSTANT_STRING_%d \x3";
-
+    
     public function candidate($source, $foundTokens)
     {
         if (isset($foundTokens[T_INLINE_HTML])) {
@@ -84,21 +87,5 @@ final class AlignPHPCode extends AdditionalPass
         }
 
         return $this->code;
-    }
-
-    public function getDescription()
-    {
-        return 'Align PHP code within HTML block.';
-    }
-
-    public function getExample()
-    {
-        return <<<'EOT'
-<div>
-    <?php
-        echo $a;
-    ?>
-</div>
-EOT;
     }
 }
