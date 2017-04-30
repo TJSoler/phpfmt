@@ -1,11 +1,30 @@
 <?php
 
-namespace Fmt;
+namespace Fmt\Fixers;
 
-use Fmt\Fixers\AlignDoubleArrow;
+use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
 
-final class AlignGroupDoubleArrow extends AlignDoubleArrow
+class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
 {
+    const ALIGNABLE_EQUAL = "\x2 EQUAL%d.%d.%d \x3";
+
+    public function __construct()
+    {
+        $this->strposFunc = 'strpos';
+        $this->substrCountFunc = 'substr_count';
+
+        if (function_exists('mb_strpos')) {
+            $this->strposFunc = 'mb_strpos';
+            $this->substrCountFunc = 'mb_substr_count';
+        }
+    }
+        
+    public function candidate($source, $token)
+    {
+        return (new AlignEquals)->candidate($source, $token);
+    }
+
     public function format($source)
     {
         $this->tkns = token_get_all($source);
@@ -97,32 +116,57 @@ final class AlignGroupDoubleArrow extends AlignDoubleArrow
 
         return $this->code;
     }
-
-    public function getDescription()
+    
+    protected function align($maxContextCounter)
     {
-        return 'Vertically align T_DOUBLE_ARROW (=>) by line groups.';
+        foreach ($maxContextCounter as $level => $entrances) {
+            foreach ($entrances as $entrance => $context) {
+                for ($j = 0; $j <= $context; ++$j) {
+                    $placeholder = sprintf(self::ALIGNABLE_EQUAL, $level, $entrance, $j);
+                    if (false === $this->strpos($this->code, $placeholder)) {
+                        continue;
+                    }
+                    if (1 === $this->substrCount($this->code, $placeholder)) {
+                        $this->code = str_replace($placeholder, '', $this->code);
+                        continue;
+                    }
+
+                    $lines = explode($this->newLine, $this->code);
+                    $linesWithObjop = [];
+
+                    foreach ($lines as $idx => $line) {
+                        if (false !== $this->strpos($line, $placeholder)) {
+                            $linesWithObjop[] = $idx;
+                        }
+                    }
+
+                    $farthest = 0;
+                    foreach ($linesWithObjop as $idx) {
+                        $farthest = max($farthest, $this->strpos($lines[$idx], $placeholder));
+                    }
+                    foreach ($linesWithObjop as $idx) {
+                        $line = $lines[$idx];
+                        $current = $this->strpos($line, $placeholder);
+                        $delta = abs($farthest - $current);
+                        if ($delta > 0) {
+                            $line = str_replace($placeholder, str_repeat(' ', $delta).$placeholder, $line);
+                            $lines[$idx] = $line;
+                        }
+                    }
+
+                    $this->code = str_replace($placeholder, '', implode($this->newLine, $lines));
+                }
+            }
+        }
     }
 
-    public function getExample()
+    private function strpos($code, $placeholder)
     {
-        return <<<'EOT'
-<?php
-$a = [
-    1 => 1,
-    22 => 22,
+        return call_user_func($this->strposFunc, $code, $placeholder);
+    }
 
-    333 => 333,
-    4444 => 4444,
-];
-
-$a = [
-    1  => 1,
-    22 => 22,
-
-    333  => 333,
-    4444 => 4444,
-];
-?>
-EOT;
+    private function substrCount($code, $placeholder)
+    {
+        return call_user_func($this->substrCountFunc, $code, $placeholder);
     }
 }
