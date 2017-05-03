@@ -33,7 +33,7 @@ final class StrictBehavior extends AdditionalPass
 
             $lcText = strtolower($text);
             $foundKeyword = &self::$functions[$lcText];
-            if (!isset($foundKeyword)) {
+            if (! isset($foundKeyword)) {
                 $this->appendCode($text);
                 continue;
             }
@@ -43,7 +43,7 @@ final class StrictBehavior extends AdditionalPass
                 continue;
             }
 
-            if (!$this->rightUsefulTokenIs(ST_PARENTHESES_OPEN)) {
+            if (! $this->rightUsefulTokenIs(ST_PARENTHESES_OPEN)) {
                 $this->appendCode($text);
                 continue;
             }

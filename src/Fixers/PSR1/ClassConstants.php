@@ -2,8 +2,8 @@
 
 namespace Fmt\Fixers\PSR1;
 
-use Fmt\Fixers\FixerInterface;
 use Fmt\FormatterPass;
+use Fmt\Fixers\FixerInterface;
 
 /**
  * Class constants MUST be declared in all upper case with underscore separators.
@@ -15,8 +15,10 @@ class ClassConstants extends FormatterPass implements FixerInterface
         if (isset($foundTokens[T_CONST])) {
             return true;
         }
+
         return false;
     }
+
     public function format($source)
     {
         $this->tkns = token_get_all($source);
@@ -42,6 +44,7 @@ class ClassConstants extends FormatterPass implements FixerInterface
                     break;
             }
         }
+
         return $this->code;
     }
 }

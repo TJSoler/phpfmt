@@ -23,11 +23,11 @@ final class TightConcat extends AdditionalPass
             $this->ptr = $index;
             switch ($id) {
                 case ST_CONCAT:
-                    if (!$this->leftUsefulTokenIs([T_LNUMBER, T_DNUMBER]) && !$this->hasLnBefore()) {
+                    if (! $this->leftUsefulTokenIs([T_LNUMBER, T_DNUMBER]) && ! $this->hasLnBefore()) {
                         $this->code = rtrim($this->code, $whitespaces);
                     }
                     list($nextId, $nextText) = $this->inspectToken(+1);
-                    if (T_WHITESPACE == $nextId && !$this->hasln($nextText) && !$this->rightUsefulTokenIs([T_LNUMBER, T_DNUMBER])) {
+                    if (T_WHITESPACE == $nextId && ! $this->hasln($nextText) && ! $this->rightUsefulTokenIs([T_LNUMBER, T_DNUMBER])) {
                         each($this->tkns);
                     }
                 default:

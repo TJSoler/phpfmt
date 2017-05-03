@@ -3,7 +3,6 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 /**
  * Add extra parentheses in new instantiations.

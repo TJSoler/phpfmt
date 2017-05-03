@@ -15,9 +15,10 @@ class ClassNames extends FormatterPass implements FixerInterface
         if (isset($foundTokens[T_CLASS])) {
             return true;
         }
+
         return false;
     }
-    
+
     public function format($source)
     {
         $this->tkns = token_get_all($source);
@@ -31,7 +32,7 @@ class ClassNames extends FormatterPass implements FixerInterface
 
             switch ($id) {
                 case T_CLASS:
-                    if (!$this->leftUsefulTokenIs(T_DOUBLE_COLON)) {
+                    if (! $this->leftUsefulTokenIs(T_DOUBLE_COLON)) {
                         $foundClass = true;
                     }
                     $this->appendCode($text);

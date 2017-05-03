@@ -54,7 +54,7 @@ final class StripSpaceWithinControlStructures extends AdditionalPass
                     break;
 
                 case T_WHILE:
-                    if (!$touchedDo && $this->leftUsefulTokenIs(ST_CURLY_CLOSE)) {
+                    if (! $touchedDo && $this->leftUsefulTokenIs(ST_CURLY_CLOSE)) {
                         $this->rtrimAndAppendCode($this->newLine);
                     }
                     $touchedDo = false;

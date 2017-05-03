@@ -79,10 +79,10 @@ final class ReindentObjOps extends FormatterPass
                 case T_VARIABLE:
                 case T_STRING:
                     $this->appendCode($text);
-                    if (!isset($levelEntranceCounter[$levelCounter])) {
+                    if (! isset($levelEntranceCounter[$levelCounter])) {
                         $levelEntranceCounter[$levelCounter] = 0;
                     }
-                    if (!isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
+                    if (! isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
                         $contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                         $maxContextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                         $touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
@@ -105,8 +105,8 @@ final class ReindentObjOps extends FormatterPass
 
                 case T_DOUBLE_COLON:
                 case T_OBJECT_OPERATOR:
-                    if (!isset($touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]]) || 0 == $touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]]) {
-                        if (!isset($touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
+                    if (! isset($touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]]) || 0 == $touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]]) {
+                        if (! isset($touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
                             $touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                         }
                         ++$touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]];
@@ -156,7 +156,7 @@ final class ReindentObjOps extends FormatterPass
 
                 case ST_COMMA:
                 case ST_SEMI_COLON:
-                    if (!isset($levelEntranceCounter[$levelCounter])) {
+                    if (! isset($levelEntranceCounter[$levelCounter])) {
                         $levelEntranceCounter[$levelCounter] = 0;
                     }
                     ++$levelEntranceCounter[$levelCounter];
@@ -190,11 +190,11 @@ final class ReindentObjOps extends FormatterPass
         &$printedPlaceholder
     ) {
         ++$levelCounter;
-        if (!isset($levelEntranceCounter[$levelCounter])) {
+        if (! isset($levelEntranceCounter[$levelCounter])) {
             $levelEntranceCounter[$levelCounter] = 0;
         }
         ++$levelEntranceCounter[$levelCounter];
-        if (!isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
+        if (! isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
             $contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
             $maxContextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
             $touchCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;

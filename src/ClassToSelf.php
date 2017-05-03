@@ -98,7 +98,7 @@ EOT;
             }
 
             if (
-                !(T_STRING == $id && strtolower($text) == strtolower($name)) ||
+                ! (T_STRING == $id && strtolower($text) == strtolower($name)) ||
                 $this->leftTokenSubsetIsAtIdx($this->tkns, $i, T_NS_SEPARATOR) ||
                 $this->rightTokenSubsetIsAtIdx($this->tkns, $i, T_NS_SEPARATOR)
             ) {

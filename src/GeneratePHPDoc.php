@@ -41,21 +41,21 @@ final class GeneratePHPDoc extends AdditionalPass
                 case T_PRIVATE:
                 case T_STATIC:
                 case T_VAR:
-                    if (!$this->leftTokenIs([T_FINAL, T_PUBLIC, T_PROTECTED, T_PRIVATE, T_STATIC, T_ABSTRACT, T_VAR])) {
+                    if (! $this->leftTokenIs([T_FINAL, T_PUBLIC, T_PROTECTED, T_PRIVATE, T_STATIC, T_ABSTRACT, T_VAR])) {
                         $touchedVisibility = true;
                         $visibilityIdx = $this->ptr;
                     }
 
                     break;
                 case T_VARIABLE:
-                    if (!$this->leftTokenIs([T_FINAL, T_PUBLIC, T_PROTECTED, T_PRIVATE, T_STATIC, T_ABSTRACT, T_VAR])) {
+                    if (! $this->leftTokenIs([T_FINAL, T_PUBLIC, T_PROTECTED, T_PRIVATE, T_STATIC, T_ABSTRACT, T_VAR])) {
                         break;
                     }
                     if ($touchedDocComment) {
                         $touchedDocComment = false;
                         break;
                     }
-                    if (!$touchedVisibility) {
+                    if (! $touchedVisibility) {
                         break;
                     }
                     $origIdx = $visibilityIdx;
@@ -85,7 +85,7 @@ final class GeneratePHPDoc extends AdditionalPass
                         break;
                     }
                     $origIdx = $visibilityIdx;
-                    if (!$touchedVisibility) {
+                    if (! $touchedVisibility) {
                         $origIdx = $this->ptr;
                     }
                     list($ntId) = $this->getToken($this->rightToken());
@@ -126,7 +126,7 @@ final class GeneratePHPDoc extends AdditionalPass
                     }
 
                     $returnStack = '';
-                    if (!$this->rightUsefulTokenIs(ST_SEMI_COLON)) {
+                    if (! $this->rightUsefulTokenIs(ST_SEMI_COLON)) {
                         $this->walkUntil(ST_CURLY_OPEN);
                         $count = 1;
                         while (list($index, $token) = each($this->tkns)) {
@@ -208,7 +208,7 @@ EOT;
         foreach ($paramStack as $param) {
             $str .= rtrim(' * @param '.$param['type']).' '.$param['name'].$this->newLine;
         }
-        if (!empty($returnStack)) {
+        if (! empty($returnStack)) {
             $str .= ' * @return '.$returnStack.$this->newLine;
         }
         $str .= ' */'.$this->newLine;

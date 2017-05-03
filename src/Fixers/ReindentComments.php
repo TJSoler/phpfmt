@@ -4,7 +4,6 @@ namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
 use Fmt\LeftAlignComment;
-use Fmt\Fixers\FixerInterface;
 
 class ReindentComments extends FormatterPass implements FixerInterface
 {
@@ -29,8 +28,6 @@ class ReindentComments extends FormatterPass implements FixerInterface
             $this->ptr = $index;
             $this->tkns[$this->ptr] = [$id, $text];
             if (T_COMMENT == $id) {
-                
-
                 if (LeftAlignComment::NON_INDENTABLE_COMMENT == $text) {
                     continue;
                 }
@@ -70,7 +67,7 @@ class ReindentComments extends FormatterPass implements FixerInterface
                         $forceIndentation = true;
                     }
 
-                    if (!$forceIndentation) {
+                    if (! $forceIndentation) {
                         continue;
                     }
 

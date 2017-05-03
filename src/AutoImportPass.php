@@ -26,7 +26,7 @@ final class AutoImportPass extends FormatterPass
         $tokens = token_get_all($source);
         while (list(, $token) = each($tokens)) {
             list($id, $text) = $this->getToken($token);
-            if (T_NAMESPACE == $id && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+            if (T_NAMESPACE == $id && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                 ++$namespaceCount;
             }
         }
@@ -111,7 +111,7 @@ final class AutoImportPass extends FormatterPass
         $namespaceName = '';
         while (list($index, $token) = each($tokens)) {
             list($id, $text) = $this->getToken($token);
-            if (T_NAMESPACE == $id && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+            if (T_NAMESPACE == $id && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                 while (list($index, $token) = each($tokens)) {
                     list($id, $text) = $this->getToken($token);
                     if (T_NS_SEPARATOR == $id || T_STRING == $id) {
@@ -141,7 +141,7 @@ final class AutoImportPass extends FormatterPass
 
             $lowerText = strtolower($text);
             if (T_STRING === $id && ($this->leftTokenSubsetIsAtIdx($tokens, $index, T_NEW) || $this->rightTokenSubsetIsAtIdx($tokens, $index, T_DOUBLE_COLON))) {
-                if (!isset($aliasCount[$lowerText])) {
+                if (! isset($aliasCount[$lowerText])) {
                     $aliasCount[$lowerText] = 0;
                 }
                 ++$aliasCount[$lowerText];
@@ -156,13 +156,13 @@ final class AutoImportPass extends FormatterPass
         while (list(, $token) = each($tokens)) {
             list($id, $text) = $this->getToken($token);
 
-            if (T_NAMESPACE == $id && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+            if (T_NAMESPACE == $id && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                 $touchedNamespace = true;
             }
             if (T_FUNCTION == $id) {
                 $touchedFunction = true;
             }
-            if (!$touchedFunction && $touchedNamespace && (T_FINAL == $id || T_STATIC == $id || T_USE == $id || T_CLASS == $id || T_INTERFACE == $id || T_TRAIT == $id)) {
+            if (! $touchedFunction && $touchedNamespace && (T_FINAL == $id || T_STATIC == $id || T_USE == $id || T_CLASS == $id || T_INTERFACE == $id || T_TRAIT == $id)) {
                 $return .= self::AUTOIMPORT_PLACEHOLDER.$this->newLine;
                 $return .= $text;
 
@@ -203,7 +203,7 @@ final class AutoImportPass extends FormatterPass
             $nextTokens[] = $popToken;
             while (($token = array_shift($nextTokens))) {
                 list($id, $text) = $this->getToken($token);
-                if (T_NAMESPACE == $id && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+                if (T_NAMESPACE == $id && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                     $touchedNamespace = true;
                 }
                 if (T_USE === $id) {
@@ -251,7 +251,7 @@ final class AutoImportPass extends FormatterPass
             $aliasCount[$alias] = 0;
         }
         foreach ($newTokens as $token) {
-            if (!($token instanceof SurrogateToken)) {
+            if (! ($token instanceof SurrogateToken)) {
                 list($id, $text) = $this->getToken($token);
                 $lowerText = strtolower($text);
                 if (T_STRING === $id && isset($aliasList[$lowerText])) {

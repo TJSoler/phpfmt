@@ -3,12 +3,11 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 class AlignPHPCode extends FormatterPass implements FixerInterface
 {
     const PLACEHOLDER_STRING = "\x2 CONSTANT_STRING_%d \x3";
-    
+
     public function candidate($source, $foundTokens)
     {
         if (isset($foundTokens[T_INLINE_HTML])) {

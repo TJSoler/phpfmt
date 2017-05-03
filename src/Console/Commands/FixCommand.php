@@ -143,7 +143,7 @@ class FixCommand extends Command
                     InputOption::VALUE_REQUIRED,
                     'Use one of profiles present in configuration file.'
                 ),
-                
+
                 // '--psr' => 'activate PSR1 and PSR2 styles',
                 new InputOption(
                     'psr',
@@ -276,7 +276,7 @@ class FixCommand extends Command
 
         $this->files = array_merge($this->files, array_keys(iterator_to_array($files)));
     }
-    
+
     protected function processFile($file)
     {
         // Check if file is php first?

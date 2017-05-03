@@ -3,7 +3,6 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 class AlignPHPCode2 extends FormatterPass implements FixerInterface
 {

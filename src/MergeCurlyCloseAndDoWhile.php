@@ -34,7 +34,7 @@ final class MergeCurlyCloseAndDoWhile extends FormatterPass
                         ) {
                             $this->appendCode($str);
                             break;
-                        } elseif (ST_SEMI_COLON == $id && !(ST_SEMI_COLON == $ptId || ST_CURLY_OPEN == $ptId || T_COMMENT == $ptId || T_DOC_COMMENT == $ptId)) {
+                        } elseif (ST_SEMI_COLON == $id && ! (ST_SEMI_COLON == $ptId || ST_CURLY_OPEN == $ptId || T_COMMENT == $ptId || T_DOC_COMMENT == $ptId)) {
                             $this->rtrimAndAppendCode($str);
                             break;
                         }

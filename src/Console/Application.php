@@ -15,7 +15,7 @@ class Application extends BaseApplication
 
         $this->add(new FixCommand());
         $this->setDefaultCommand(' ', true);
-        
+
         // is there a way to show the help if no arguments are found?
     }
 
@@ -26,6 +26,7 @@ class Application extends BaseApplication
         if ('@'.'git-commit@' !== $commit) {
             $version .= ' ('.substr($commit, 0, 7).')';
         }
+
         return $version;
     }
 }

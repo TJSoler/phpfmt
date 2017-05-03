@@ -19,7 +19,7 @@ final class ReplaceIsNull extends AdditionalPass
             $this->ptr = $index;
             $this->cache = [];
 
-            if (T_STRING == $id && 'is_null' == strtolower($text) && !$this->leftUsefulTokenIs([T_OBJECT_OPERATOR, T_DOUBLE_COLON])) {
+            if (T_STRING == $id && 'is_null' == strtolower($text) && ! $this->leftUsefulTokenIs([T_OBJECT_OPERATOR, T_DOUBLE_COLON])) {
                 $this->appendCode('null');
                 $this->printAndStopAt(ST_PARENTHESES_OPEN);
                 $this->appendCode('===');

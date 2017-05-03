@@ -49,7 +49,7 @@ final class SpaceAroundControlStructures extends AdditionalPass
                 case T_COMMENT:
                     $isComment = false;
                     if (
-                        !$this->leftUsefulTokenIs([T_OPEN_TAG]) &&
+                        ! $this->leftUsefulTokenIs([T_OPEN_TAG]) &&
                         $this->rightTokenIs([
                             T_IF,
                             T_DO,
@@ -71,14 +71,14 @@ final class SpaceAroundControlStructures extends AdditionalPass
                 case T_FOR:
                 case T_FOREACH:
                 case T_SWITCH:
-                    if (!$isComment) {
+                    if (! $isComment) {
                         $this->appendCode($this->newLine);
                     }
 
                     $this->appendCode($text);
                     break;
                 case T_WHILE:
-                    if (!$isComment) {
+                    if (! $isComment) {
                         $this->appendCode($this->newLine);
                     }
                     $this->appendCode($text);
@@ -91,7 +91,7 @@ final class SpaceAroundControlStructures extends AdditionalPass
                     break;
                 case ST_CURLY_CLOSE:
                     $this->appendCode($text);
-                    if (!$this->rightTokenIs([T_ENCAPSED_AND_WHITESPACE, ST_QUOTE, ST_COMMA, ST_SEMI_COLON, ST_PARENTHESES_CLOSE])) {
+                    if (! $this->rightTokenIs([T_ENCAPSED_AND_WHITESPACE, ST_QUOTE, ST_COMMA, ST_SEMI_COLON, ST_PARENTHESES_CLOSE])) {
                         $this->appendCode($this->newLine);
                     }
                     break;

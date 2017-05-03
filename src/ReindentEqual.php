@@ -61,7 +61,7 @@ final class ReindentEqual extends FormatterPass
                     break;
 
                 case T_STRING:
-                    if ($this->rightUsefulTokenIs(ST_PARENTHESES_OPEN) && !$this->leftUsefulTokenIs(ST_EQUAL)) {
+                    if ($this->rightUsefulTokenIs(ST_PARENTHESES_OPEN) && ! $this->leftUsefulTokenIs(ST_EQUAL)) {
                         return;
                     }
 
@@ -94,7 +94,7 @@ final class ReindentEqual extends FormatterPass
                     if (
                         $this->hasLn($text)
                         &&
-                        !(
+                        ! (
                             $this->rightUsefulTokenIs([ST_SEMI_COLON])
                             ||
                             $this->leftUsefulTokenIs([

@@ -19,7 +19,7 @@ final class TrimSpaceBeforeSemicolon extends AdditionalPass
             $this->ptr = $index;
             switch ($id) {
                 case ST_SEMI_COLON:
-                    if (!$this->leftTokenIs([T_COMMENT, T_DOC_COMMENT])) {
+                    if (! $this->leftTokenIs([T_COMMENT, T_DOC_COMMENT])) {
                         $this->rtrimAndAppendCode($text);
                         break;
                     }

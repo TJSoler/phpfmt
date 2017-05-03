@@ -79,9 +79,9 @@ class KeywordsLowerCase extends FormatterPass implements FixerInterface
         'xor',
         'true',
         'false',
-        'null'
+        'null',
     ];
-   
+
     public function candidate($source, $foundTokens)
     {
         return $value = str_contains($source, static::$reservedWords);
@@ -128,7 +128,7 @@ class KeywordsLowerCase extends FormatterPass implements FixerInterface
             if (
                 (
                     ('true' === $lcText || 'false' === $lcText || 'null' === $lcText) &&
-                    !$this->leftUsefulTokenIs([
+                    ! $this->leftUsefulTokenIs([
                         T_NS_SEPARATOR,
                         T_AS,
                         T_CLASS,
@@ -144,7 +144,7 @@ class KeywordsLowerCase extends FormatterPass implements FixerInterface
                         T_INSTEADOF,
                         T_CONST,
                     ]) &&
-                    !$this->rightUsefulTokenIs([
+                    ! $this->rightUsefulTokenIs([
                         T_NS_SEPARATOR,
                         T_AS,
                         T_CLASS,

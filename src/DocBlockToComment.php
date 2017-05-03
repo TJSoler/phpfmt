@@ -30,7 +30,7 @@ final class DocBlockToComment extends AdditionalPass
                 continue;
             }
 
-            if (!$touchedOpenTag && $this->leftUsefulTokenIs(T_OPEN_TAG)) {
+            if (! $touchedOpenTag && $this->leftUsefulTokenIs(T_OPEN_TAG)) {
                 $touchedOpenTag = true;
                 continue;
             }
@@ -115,7 +115,7 @@ EOT;
                 break;
             }
         }
-        if (!$foundVar) {
+        if (! $foundVar) {
             $commentTokenText = $this->updateComment($commentTokenText);
         }
 
@@ -127,7 +127,7 @@ EOT;
         list(, $nextText) = $this->rightUsefulToken();
         $this->ptr = $this->rightUsefulTokenIdx();
         $this->cache = [];
-        if (!$this->rightUsefulTokenIs(ST_EQUAL) ||
+        if (! $this->rightUsefulTokenIs(ST_EQUAL) ||
             false === strpos($commentTokenText, $nextText)) {
             $commentTokenText = $this->updateComment($commentTokenText);
         }

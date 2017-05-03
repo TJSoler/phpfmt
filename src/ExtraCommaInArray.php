@@ -36,14 +36,14 @@ final class ExtraCommaInArray extends FormatterPass
                     break;
 
                 case ST_BRACKET_CLOSE:
-                    if (isset($contextStack[0]) && !$this->leftTokenIs(ST_BRACKET_OPEN)) {
-                        if (self::ST_SHORT_ARRAY_OPEN == end($contextStack) && ($this->hasLnLeftToken() || $this->hasLnBefore()) && !$this->leftUsefulTokenIs(ST_COMMA)) {
+                    if (isset($contextStack[0]) && ! $this->leftTokenIs(ST_BRACKET_OPEN)) {
+                        if (self::ST_SHORT_ARRAY_OPEN == end($contextStack) && ($this->hasLnLeftToken() || $this->hasLnBefore()) && ! $this->leftUsefulTokenIs(ST_COMMA)) {
                             $prevTokenIdx = $this->leftUsefulTokenIdx();
                             list($tknId, $tknText) = $this->getToken($this->tkns[$prevTokenIdx]);
                             if (T_END_HEREDOC != $tknId && ST_BRACKET_OPEN != $tknId) {
                                 $this->tkns[$prevTokenIdx] = [$tknId, $tknText.','];
                             }
-                        } elseif (self::ST_SHORT_ARRAY_OPEN == end($contextStack) && !($this->hasLnLeftToken() || $this->hasLnBefore()) && $this->leftUsefulTokenIs(ST_COMMA)) {
+                        } elseif (self::ST_SHORT_ARRAY_OPEN == end($contextStack) && ! ($this->hasLnLeftToken() || $this->hasLnBefore()) && $this->leftUsefulTokenIs(ST_COMMA)) {
                             $prevTokenIdx = $this->leftUsefulTokenIdx();
                             list($tknId, $tknText) = $this->getToken($this->tkns[$prevTokenIdx]);
                             $this->tkns[$prevTokenIdx] = [$tknId, rtrim($tknText, ',')];
@@ -66,13 +66,13 @@ final class ExtraCommaInArray extends FormatterPass
 
                 case ST_PARENTHESES_CLOSE:
                     if (isset($contextStack[0])) {
-                        if (T_ARRAY == end($contextStack) && ($this->hasLnLeftToken() || $this->hasLnBefore()) && !$this->leftUsefulTokenIs(ST_COMMA)) {
+                        if (T_ARRAY == end($contextStack) && ($this->hasLnLeftToken() || $this->hasLnBefore()) && ! $this->leftUsefulTokenIs(ST_COMMA)) {
                             $prevTokenIdx = $this->leftUsefulTokenIdx();
                             list($tknId, $tknText) = $this->getToken($this->tkns[$prevTokenIdx]);
                             if (T_END_HEREDOC != $tknId && ST_PARENTHESES_OPEN != $tknId) {
                                 $this->tkns[$prevTokenIdx] = [$tknId, $tknText.','];
                             }
-                        } elseif (T_ARRAY == end($contextStack) && !($this->hasLnLeftToken() || $this->hasLnBefore()) && $this->leftUsefulTokenIs(ST_COMMA)) {
+                        } elseif (T_ARRAY == end($contextStack) && ! ($this->hasLnLeftToken() || $this->hasLnBefore()) && $this->leftUsefulTokenIs(ST_COMMA)) {
                             $prevTokenIdx = $this->leftUsefulTokenIdx();
                             list($tknId, $tknText) = $this->getToken($this->tkns[$prevTokenIdx]);
                             $this->tkns[$prevTokenIdx] = [$tknId, rtrim($tknText, ',')];

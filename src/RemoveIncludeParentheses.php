@@ -9,6 +9,7 @@ final class RemoveIncludeParentheses extends AdditionalPass
         if (isset($foundTokens[T_INCLUDE]) || isset($foundTokens[T_REQUIRE]) || isset($foundTokens[T_INCLUDE_ONCE]) || isset($foundTokens[T_REQUIRE_ONCE])) {
             return true;
         }
+
         return false;
     }
 
@@ -35,8 +36,8 @@ final class RemoveIncludeParentheses extends AdditionalPass
                 case T_REQUIRE:
                 case T_INCLUDE_ONCE:
                 case T_REQUIRE_ONCE:
-                    $this->appendCode($text . $this->getSpace());
-                    if (!$this->rightTokenIs(ST_PARENTHESES_OPEN)) {
+                    $this->appendCode($text.$this->getSpace());
+                    if (! $this->rightTokenIs(ST_PARENTHESES_OPEN)) {
                         break;
                     }
                     ++$parenCount;
@@ -47,6 +48,7 @@ final class RemoveIncludeParentheses extends AdditionalPass
                     break;
             }
         }
+
         return $this->code;
     }
 

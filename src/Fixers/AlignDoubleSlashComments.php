@@ -4,7 +4,6 @@ namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
 use Fmt\LeftAlignComment;
-use Fmt\Fixers\FixerInterface;
 
 class AlignDoubleSlashComments extends FormatterPass implements FixerInterface
 {
@@ -39,7 +38,7 @@ class AlignDoubleSlashComments extends FormatterPass implements FixerInterface
                     }
 
                     $prefix = '';
-                    if (substr($text, 0, 2) == '//' && !$touchedNonAlignableComment) {
+                    if (substr($text, 0, 2) == '//' && ! $touchedNonAlignableComment) {
                         $prefix = sprintf(self::ALIGNABLE_COMMENT, $contextCounter);
                     }
                     $this->appendCode($prefix.$text);

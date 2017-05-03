@@ -11,12 +11,14 @@ class OrderAndRemoveUseClauses extends AdditionalPass
     const STRIP_BLANK_LINES = true;
     const TRAIT_BLOCK_OPEN = 'TRAIT_BLOCK_OPEN';
     private $sortFunction = null;
+
     public function __construct(callable $sortFunction = null)
     {
         $this->sortFunction = $sortFunction;
         if (null == $sortFunction) {
             $this->sortFunction = function ($useStack) {
                 natcasesort($useStack);
+
                 return $useStack;
             };
         }
@@ -27,12 +29,14 @@ class OrderAndRemoveUseClauses extends AdditionalPass
         if (isset($foundTokens[T_USE])) {
             return true;
         }
+
         return false;
     }
 
     public function format($source = '')
     {
         $source = $this->sortWithinNamespaces($source);
+
         return $source;
     }
 
@@ -86,7 +90,7 @@ EOT;
             }
             if (
                 (T_TRAIT === $id || T_CLASS === $id) &&
-                !$touchedDoubleColon
+                ! $touchedDoubleColon
             ) {
                 $newTokens[] = $token;
                 while (list(, $token) = each($tokens)) {
@@ -97,7 +101,7 @@ EOT;
             }
             $touchedDoubleColon = false;
             if (
-                !$stripBlankLines &&
+                ! $stripBlankLines &&
                 (
                     T_WHITESPACE === $id
                     ||
@@ -116,21 +120,21 @@ EOT;
             if (T_USE === $id || $foundComma) {
                 list($useTokens, $foundToken) = $this->walkAndAccumulateStopAtAny($tokens, $stopTokens);
                 if (ST_SEMI_COLON == $foundToken) {
-                    $useStack[$groupCount][] = 'use ' . ltrim($useTokens) . ';';
+                    $useStack[$groupCount][] = 'use '.ltrim($useTokens).';';
                     $newTokens[] = new SurrogateToken();
                     next($tokens);
                     $foundComma = false;
-                } else if (ST_COMMA == $foundToken) {
-                    $useStack[$groupCount][] = 'use ' . ltrim($useTokens) . ';';
+                } elseif (ST_COMMA == $foundToken) {
+                    $useStack[$groupCount][] = 'use '.ltrim($useTokens).';';
                     $newTokens[] = new SurrogateToken();
-                    $newTokens[] = [T_WHITESPACE, $this->newLine . $this->newLine];
+                    $newTokens[] = [T_WHITESPACE, $this->newLine.$this->newLine];
                     $foundComma = true;
-                } else if (ST_CURLY_OPEN == $foundToken) {
+                } elseif (ST_CURLY_OPEN == $foundToken) {
                     next($tokens);
-                    $base = $this->newLine . 'use ' . ltrim($useTokens);
+                    $base = $this->newLine.'use '.ltrim($useTokens);
                     do {
                         list($groupText, $groupFoundToken) = $this->walkAndAccumulateStopAtAny($tokens, [ST_COMMA, ST_CURLY_CLOSE]);
-                        $useStack[$groupCount][] = $base . trim($groupText) . ';';
+                        $useStack[$groupCount][] = $base.trim($groupText).';';
                         $newTokens[] = new SurrogateToken();
                         next($tokens);
                     } while (ST_COMMA == $groupFoundToken);
@@ -158,11 +162,11 @@ EOT;
         foreach ($newTokens as $idx => $token) {
             if ($token instanceof SurrogateToken) {
                 $return .= array_shift($useStack);
-                if ($blanklineAfterUseBlock && !isset($useStack[0])) {
+                if ($blanklineAfterUseBlock && ! isset($useStack[0])) {
                     $return .= $this->newLine;
                 }
                 continue;
-            } else if (T_WHITESPACE == $token[0] && isset($newTokens[$idx - 1], $newTokens[$idx + 1]) && $newTokens[$idx - 1] instanceof SurrogateToken && $newTokens[$idx + 1] instanceof SurrogateToken) {
+            } elseif (T_WHITESPACE == $token[0] && isset($newTokens[$idx - 1], $newTokens[$idx + 1]) && $newTokens[$idx - 1] instanceof SurrogateToken && $newTokens[$idx + 1] instanceof SurrogateToken) {
                 if ($stripBlankLines) {
                     $return .= $this->newLine;
                     continue;
@@ -174,7 +178,7 @@ EOT;
             $lowerText = strtolower($text);
             if (T_STRING === $id && isset($aliasList[$lowerText])) {
                 ++$aliasCount[$lowerText];
-            } else if (T_DOC_COMMENT === $id) {
+            } elseif (T_DOC_COMMENT === $id) {
                 foreach ($aliasList as $alias => $use) {
                     if (false !== stripos($text, $alias)) {
                         ++$aliasCount[$alias];
@@ -193,8 +197,9 @@ EOT;
             );
         }
         foreach ($unusedImport as $v) {
-            $return = str_ireplace($aliasList[$v] . $this->newLine, null, $return);
+            $return = str_ireplace($aliasList[$v].$this->newLine, null, $return);
         }
+
         return $return;
     }
 
@@ -203,6 +208,7 @@ EOT;
         if (false !== stripos($use, ' as ')) {
             return substr(stristr($use, ' as '), strlen(' as '), -1);
         }
+
         return basename(str_replace('\\', '/', trim(substr($use, strlen('use'), -1))));
     }
 
@@ -223,7 +229,7 @@ EOT;
             ) {
                 ++$classRelatedCount;
             }
-            if (T_NAMESPACE == $id && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+            if (T_NAMESPACE == $id && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                 ++$namespaceCount;
             }
         }
@@ -255,18 +261,18 @@ EOT;
                             $namespaceBlock .= $text;
                             if (ST_CURLY_OPEN == $id) {
                                 ++$curlyCount;
-                            } else if (ST_CURLY_CLOSE == $id) {
+                            } elseif (ST_CURLY_CLOSE == $id) {
                                 --$curlyCount;
                             }
                             if (0 == $curlyCount) {
                                 break;
                             }
                         }
-                    } else if (ST_SEMI_COLON === $id) {
+                    } elseif (ST_SEMI_COLON === $id) {
                         while (list($index, $token) = each($tokens)) {
                             list($id, $text) = $this->getToken($token);
                             $this->ptr = $index;
-                            if (T_NAMESPACE == $id && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+                            if (T_NAMESPACE == $id && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                                 prev($tokens);
                                 break;
                             }
@@ -276,13 +282,14 @@ EOT;
                     $return .= str_replace(
                         self::OPENER_PLACEHOLDER,
                         '',
-                        $this->sortUseClauses(self::OPENER_PLACEHOLDER . $namespaceBlock, self::SPLIT_COMMA, self::REMOVE_UNUSED, self::STRIP_BLANK_LINES, self::BLANK_LINE_AFTER_USE_BLOCK)
+                        $this->sortUseClauses(self::OPENER_PLACEHOLDER.$namespaceBlock, self::SPLIT_COMMA, self::REMOVE_UNUSED, self::STRIP_BLANK_LINES, self::BLANK_LINE_AFTER_USE_BLOCK)
                     );
                     break;
                 default:
                     $return .= $text;
             }
         }
+
         return $return;
     }
 }

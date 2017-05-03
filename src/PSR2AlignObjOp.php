@@ -33,7 +33,7 @@ final class PSR2AlignObjOp extends FormatterPass
                     break;
 
                 case T_OBJECT_OPERATOR:
-                    if (!isset($contextMetaCount[$contextCounter])) {
+                    if (! isset($contextMetaCount[$contextCounter])) {
                         $contextMetaCount[$contextCounter] = 0;
                     }
                     if ($this->hasLnBefore() || 0 == $contextMetaCount[$contextCounter]) {

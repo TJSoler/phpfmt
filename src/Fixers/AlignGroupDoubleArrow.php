@@ -3,7 +3,6 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
 {
@@ -19,7 +18,7 @@ class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
             $this->substrCountFunc = 'mb_substr_count';
         }
     }
-        
+
     public function candidate($source, $token)
     {
         return (new AlignEquals)->candidate($source, $token);
@@ -40,11 +39,11 @@ class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
             $this->ptr = $index;
             switch ($id) {
                 case ST_COMMA:
-                    if (!$this->hasLnAfter() && !$this->hasLnRightToken()) {
-                        if (!isset($levelEntranceCounter[$levelCounter])) {
+                    if (! $this->hasLnAfter() && ! $this->hasLnRightToken()) {
+                        if (! isset($levelEntranceCounter[$levelCounter])) {
                             $levelEntranceCounter[$levelCounter] = 0;
                         }
-                        if (!isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
+                        if (! isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
                             $contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                             $maxContextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                         }
@@ -70,11 +69,11 @@ class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
                 case T_WHITESPACE:
                     if ($this->hasLn($text) && substr_count($text, $this->newLine) >= 2) {
                         ++$levelCounter;
-                        if (!isset($levelEntranceCounter[$levelCounter])) {
+                        if (! isset($levelEntranceCounter[$levelCounter])) {
                             $levelEntranceCounter[$levelCounter] = 0;
                         }
                         ++$levelEntranceCounter[$levelCounter];
-                        if (!isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
+                        if (! isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
                             $contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                             $maxContextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                         }
@@ -87,11 +86,11 @@ class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
                 case ST_PARENTHESES_OPEN:
                 case ST_BRACKET_OPEN:
                     ++$levelCounter;
-                    if (!isset($levelEntranceCounter[$levelCounter])) {
+                    if (! isset($levelEntranceCounter[$levelCounter])) {
                         $levelEntranceCounter[$levelCounter] = 0;
                     }
                     ++$levelEntranceCounter[$levelCounter];
-                    if (!isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
+                    if (! isset($contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]])) {
                         $contextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                         $maxContextCounter[$levelCounter][$levelEntranceCounter[$levelCounter]] = 0;
                     }
@@ -116,7 +115,7 @@ class AlignGroupDoubleArrow extends FormatterPass implements FixerInterface
 
         return $this->code;
     }
-    
+
     protected function align($maxContextCounter)
     {
         foreach ($maxContextCounter as $level => $entrances) {
