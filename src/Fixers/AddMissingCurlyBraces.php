@@ -3,8 +3,6 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\LeftAlignComment;
-use Fmt\Fixers\FixerInterface;
 
 class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
 {
@@ -59,7 +57,7 @@ class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
                         $touchedCurlyClose = false;
                         $hasCurlyOnLeft = true;
                     }
-                    
+
                 case T_FOR:
                 case T_FOREACH:
                 case T_ELSEIF:
@@ -107,7 +105,7 @@ class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
                 $this->ptr,
                 [
                     ST_SEMI_COLON,
-                    ST_SEMI_COLON
+                    ST_SEMI_COLON,
                 ]
             );
         }
@@ -122,7 +120,7 @@ class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
             [
                 T_WHITESPACE,
                 T_COMMENT,
-                T_DOC_COMMENT
+                T_DOC_COMMENT,
             ]
         );
 
@@ -131,10 +129,10 @@ class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
             $this->ptr,
             [
                 ST_CURLY_OPEN,
-                ST_CURLY_OPEN
+                ST_CURLY_OPEN,
             ]
         );
-        
+
         $this->refInsert(
             $this->tkns,
             $this->ptr,
@@ -152,16 +150,16 @@ class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
             $this->ptr,
             [
                 T_WHITESPACE,
-                $this->newLine
+                $this->newLine,
             ]
         );
-        
+
         $this->refInsert(
             $this->tkns,
             $this->ptr,
             [
                 ST_CURLY_CLOSE,
-                ST_CURLY_CLOSE
+                ST_CURLY_CLOSE,
             ]
         );
         $this->refInsert(
@@ -169,7 +167,7 @@ class AddMissingCurlyBraces extends FormatterPass implements FixerInterface
             $this->ptr,
             [
                 T_WHITESPACE,
-                $this->newLine
+                $this->newLine,
             ]
         );
     }

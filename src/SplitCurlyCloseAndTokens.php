@@ -6,7 +6,7 @@ class SplitCurlyCloseAndTokens extends FormatterPass
 {
     public function candidate($source, $foundTokens)
     {
-        if (!isset($foundTokens[ST_CURLY_CLOSE])) {
+        if (! isset($foundTokens[ST_CURLY_CLOSE])) {
             return false;
         }
 
@@ -15,7 +15,7 @@ class SplitCurlyCloseAndTokens extends FormatterPass
             list($id) = $this->getToken($token);
             $this->ptr = $index;
 
-            if (ST_CURLY_CLOSE == $id && !$this->hasLnAfter()) {
+            if (ST_CURLY_CLOSE == $id && ! $this->hasLnAfter()) {
                 return true;
             }
         }
@@ -97,8 +97,8 @@ class SplitCurlyCloseAndTokens extends FormatterPass
                             T_IF == $poppedBlock ||
                             T_WHILE == $poppedBlock
                         ) &&
-                        !$this->hasLnAfter() &&
-                        !$this->rightTokenIs([
+                        ! $this->hasLnAfter() &&
+                        ! $this->rightTokenIs([
                             ST_BRACKET_OPEN,
                             ST_CURLY_CLOSE,
                             ST_PARENTHESES_CLOSE,

@@ -42,7 +42,7 @@ final class ReturnNull extends AdditionalPass
                         break;
                     }
                     if (
-                        !(
+                        ! (
                             (T_STRING == $id && strtolower($text) == 'null') ||
                             ST_PARENTHESES_OPEN == $id ||
                             ST_PARENTHESES_CLOSE == $id

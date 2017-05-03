@@ -32,7 +32,7 @@ final class LongArray extends AdditionalPass
                     $contextStack[] = $found;
                     break;
                 case ST_BRACKET_CLOSE:
-                    if (isset($contextStack[0]) && !$this->leftTokenIs(ST_BRACKET_OPEN)) {
+                    if (isset($contextStack[0]) && ! $this->leftTokenIs(ST_BRACKET_OPEN)) {
                         if (self::ST_SHORT_ARRAY_OPEN == end($contextStack)) {
                             $id = ')';
                             $text = ')';
@@ -53,7 +53,7 @@ final class LongArray extends AdditionalPass
                 case ST_PARENTHESES_OPEN:
                     if (isset($contextStack[0]) && T_ARRAY == end($contextStack) && $this->rightTokenIs(ST_PARENTHESES_CLOSE)) {
                         $contextStack[sizeof($contextStack) - 1] = self::EMPTY_ARRAY;
-                    } elseif (!$this->leftTokenIs([T_ARRAY, T_STRING])) {
+                    } elseif (! $this->leftTokenIs([T_ARRAY, T_STRING])) {
                         $contextStack[] = ST_PARENTHESES_OPEN;
                     }
                     break;

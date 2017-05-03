@@ -3,7 +3,6 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 class AlignEquals extends FormatterPass implements FixerInterface
 {
@@ -59,7 +58,7 @@ class AlignEquals extends FormatterPass implements FixerInterface
                     $this->appendCode($text);
                     break;
                 case ST_EQUAL:
-                    if (!$parenCount && !$bracketCount) {
+                    if (! $parenCount && ! $bracketCount) {
                         $this->appendCode(sprintf(self::ALIGNABLE_EQUAL, $contextCounter).$text);
                         break;
                     }
@@ -71,6 +70,7 @@ class AlignEquals extends FormatterPass implements FixerInterface
         }
 
         $this->alignPlaceholders(self::ALIGNABLE_EQUAL, $contextCounter);
+
         return $this->code;
     }
 }

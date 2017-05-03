@@ -62,7 +62,7 @@ class AliasToMaster extends AdditionalPass
                 (T_STRING == $id || T_EXIT == $id) &&
                 isset(static::$aliasList[strtolower($text)]) &&
                 (
-                    !(
+                    ! (
                         $this->leftUsefulTokenIs([
                             T_NEW,
                             T_NS_SEPARATOR,
@@ -118,6 +118,6 @@ EOT;
             return;
         }
 
-        $this->touchedEmptyNs = !$this->leftUsefulTokenIs(T_STRING);
+        $this->touchedEmptyNs = ! $this->leftUsefulTokenIs(T_STRING);
     }
 }

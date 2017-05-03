@@ -60,7 +60,7 @@ final class AllmanStyleBraces extends AdditionalPass
                     $blockStack[] = $block;
 
                     if ($this->leftUsefulTokenIs([ST_PARENTHESES_CLOSE, T_ELSE, T_FINALLY, T_DO, T_STRING])) {
-                        if (!$this->hasLnLeftToken()) {
+                        if (! $this->hasLnLeftToken()) {
                             $this->appendCode($this->getCrlfIndent());
                         }
                     }
@@ -79,9 +79,9 @@ final class AllmanStyleBraces extends AdditionalPass
                         $this->setIndent(+1);
                     }
                     if (
-                        !$this->hasLnAfter() &&
-                        !$this->leftUsefulTokenIs([T_OBJECT_OPERATOR, T_DOUBLE_COLON]) &&
-                        !$this->rightTokenIs([T_COMMENT, T_DOC_COMMENT])
+                        ! $this->hasLnAfter() &&
+                        ! $this->leftUsefulTokenIs([T_OBJECT_OPERATOR, T_DOUBLE_COLON]) &&
+                        ! $this->rightTokenIs([T_COMMENT, T_DOC_COMMENT])
                     ) {
                         $this->setIndent(+1);
                         $this->appendCode($this->getCrlfIndent());
@@ -138,7 +138,7 @@ final class AllmanStyleBraces extends AdditionalPass
                 case T_ELSEIF:
                 case T_FINALLY:
                     list($prevId, $prevText) = $this->getToken($this->leftToken());
-                    if (!$this->hasLn($prevText) && T_OPEN_TAG != $prevId) {
+                    if (! $this->hasLn($prevText) && T_OPEN_TAG != $prevId) {
                         $this->appendCode($this->getCrlfIndent());
                         if ($touchedCaseOrDefault) {
                             $this->appendCode($this->indentChar);
@@ -151,7 +151,7 @@ final class AllmanStyleBraces extends AdditionalPass
                     if (' ' == substr($this->code, -1, 1)) {
                         $this->code = substr($this->code, 0, -1);
                     }
-                    if (!$this->hasLnLeftToken()) {
+                    if (! $this->hasLnLeftToken()) {
                         $this->appendCode($this->getCrlfIndent());
                         if ($touchedCaseOrDefault) {
                             $this->appendCode($this->indentChar);

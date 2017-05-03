@@ -90,7 +90,7 @@ final class ConstructorPass extends FormatterPass
                         }
                     }
                     $functionList = array_combine($functionList, $functionList);
-                    if (!isset($functionList['__construct'])) {
+                    if (! isset($functionList['__construct'])) {
                         $this->appendCode('function __construct('.implode(', ', $classAttributes).'){'.$this->newLine);
                         foreach ($classAttributes as $var) {
                             $this->appendCode($this->generate($var));

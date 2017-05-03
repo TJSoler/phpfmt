@@ -217,7 +217,7 @@ EOT;
             switch ($id) {
                 case T_COMMENT:
                 case T_DOC_COMMENT:
-                    if (!$this->hasLnBefore() && $this->leftTokenIs(ST_CURLY_OPEN)) {
+                    if (! $this->hasLnBefore() && $this->leftTokenIs(ST_CURLY_OPEN)) {
                         $this->rtrimAndAppendCode($this->getSpace().$text);
                         break;
                     } elseif ($this->rightUsefulTokenIs(T_CONSTANT_ENCAPSED_STRING)) {
@@ -227,7 +227,7 @@ EOT;
                     $this->appendCode($text);
                     break;
                 case T_CLOSE_TAG:
-                    if (!$this->hasLnBefore()) {
+                    if (! $this->hasLnBefore()) {
                         $this->rtrimAndAppendCode($this->getSpace().$text);
                         break;
                     }

@@ -32,7 +32,7 @@ final class TwoCommandsInSameLine extends FormatterPass
                 case T_BREAK:
                 case T_ECHO:
                 case T_PRINT:
-                    if ($touchedSemicolon && !$this->hasLnBefore()) {
+                    if ($touchedSemicolon && ! $this->hasLnBefore()) {
                         $touchedSemicolon = false;
                         $this->appendCode($this->newLine);
                     }
@@ -54,6 +54,7 @@ final class TwoCommandsInSameLine extends FormatterPass
                     break;
             }
         }
+
         return $this->code;
     }
 }

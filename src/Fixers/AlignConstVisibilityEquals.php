@@ -3,7 +3,6 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 class AlignConstVisibilityEquals extends FormatterPass implements FixerInterface
 {
@@ -73,7 +72,7 @@ class AlignConstVisibilityEquals extends FormatterPass implements FixerInterface
                     $this->appendCode($text);
                     break;
                 case ST_EQUAL:
-                    if ($touchedVisibilityConst && !$parenCount && !$bracketCount) {
+                    if ($touchedVisibilityConst && ! $parenCount && ! $bracketCount) {
                         $this->appendCode(sprintf(self::ALIGNABLE_EQUAL, $contextCounter).$text);
                         break;
                     }

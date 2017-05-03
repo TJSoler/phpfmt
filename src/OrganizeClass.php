@@ -141,7 +141,7 @@ EOT;
                             T_PUBLIC,
                             T_STATIC,
                         ], $this->ignoreFutileTokens)) {
-                            if (!$touchedDocComment) {
+                            if (! $touchedDocComment) {
                                 $touchedDocComment = true;
                                 $docCommentStack = ' ';
                             }
@@ -153,7 +153,7 @@ EOT;
                     break;
 
                 case T_DOC_COMMENT:
-                    if (!$touchedDocComment) {
+                    if (! $touchedDocComment) {
                         $touchedDocComment = true;
                         $docCommentStack = ' ';
                     }
@@ -248,7 +248,7 @@ EOT;
         ksort($functionList);
 
         $final = '';
-        if (!empty($useStack)) {
+        if (! empty($useStack)) {
             $final .= $useStack.$this->newLine;
         }
 

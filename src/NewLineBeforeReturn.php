@@ -22,7 +22,7 @@ final class NewLineBeforeReturn extends AdditionalPass
             $this->ptr = $index;
             switch ($id) {
                 case T_RETURN:
-                    if (!$this->leftUsefulTokenIs([ST_CURLY_OPEN, ST_COLON])) {
+                    if (! $this->leftUsefulTokenIs([ST_CURLY_OPEN, ST_COLON])) {
                         $this->rtrimAndAppendCode($this->newLine.$this->newLine.$text);
                         break;
                     }

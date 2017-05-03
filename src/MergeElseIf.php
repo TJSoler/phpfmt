@@ -22,7 +22,7 @@ final class MergeElseIf extends AdditionalPass
             $this->ptr = $index;
             switch ($id) {
                 case T_IF:
-                    if ($this->leftTokenIs([T_ELSE]) && !$this->leftTokenIs([T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
+                    if ($this->leftTokenIs([T_ELSE]) && ! $this->leftTokenIs([T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
                         $this->rtrimAndAppendCode($text);
                         break;
                     }

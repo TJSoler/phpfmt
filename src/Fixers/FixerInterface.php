@@ -4,7 +4,7 @@ namespace Fmt\Fixers;
 
 interface FixerInterface
 {
-    /**
+    /*
      * Accepts a string containing the source that
      * the fixer needs to fix.
      *

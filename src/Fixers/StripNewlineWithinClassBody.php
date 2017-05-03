@@ -3,15 +3,12 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\LeftAlignComment;
-use Fmt\Fixers\FixerInterface;
 
 /**
  * Strip empty lines after class opening curly brace.
  */
 class StripNewlineWithinClassBody extends FormatterPass implements FixerInterface
 {
-    
     public function candidate($source, $foundTokens)
     {
         if (isset($foundTokens[T_CLASS]) || isset($foundTokens[T_TRAIT])) {

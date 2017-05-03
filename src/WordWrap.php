@@ -28,7 +28,7 @@ final class WordWrap extends AdditionalPass
 
             $originalText = $text;
             if (T_WHITESPACE == $id) {
-                if (!$detectedTab && false !== strpos($text, "\t")) {
+                if (! $detectedTab && false !== strpos($text, "\t")) {
                     $detectedTab = true;
                 }
                 $text = str_replace(

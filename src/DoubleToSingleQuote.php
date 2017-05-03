@@ -63,7 +63,6 @@ EOT;
         T_CONSTANT_ENCAPSED_STRING == $id &&
         '"' == $text[0] &&
         false === strpos($text, '\'') &&
-        !preg_match('/(?<!\\\\)(?:\\\\{2})*\\\\(?!["$\\\\])/', $text)
-        ;
+        ! preg_match('/(?<!\\\\)(?:\\\\{2})*\\\\(?!["$\\\\])/', $text);
     }
 }

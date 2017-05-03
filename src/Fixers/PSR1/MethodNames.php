@@ -15,6 +15,7 @@ class MethodNames extends FormatterPass implements FixerInterface
         if (isset($foundTokens[T_FUNCTION])) {
             return true;
         }
+
         return false;
     }
 
@@ -22,7 +23,7 @@ class MethodNames extends FormatterPass implements FixerInterface
     {
         $this->tkns = token_get_all($source);
         $this->code = '';
-        
+
         $foundMethod = false;
         $methodReplaceList = [];
 
@@ -54,7 +55,7 @@ class MethodNames extends FormatterPass implements FixerInterface
                     break;
             }
         }
-        
+
         $this->tkns = token_get_all($this->code);
         $this->code = '';
         while (list($index, $token) = each($this->tkns)) {
@@ -71,6 +72,7 @@ class MethodNames extends FormatterPass implements FixerInterface
                     break;
             }
         }
+
         return $this->code;
     }
 }

@@ -11,7 +11,7 @@ abstract class FormatterPass
     protected $ignoreFutileTokens = [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT];
 
     protected $indent = 0;
-    
+
     // if we are using spaces, how many to indent a tab?
     protected $indentBlock = 4;
 
@@ -90,7 +90,7 @@ abstract class FormatterPass
 
     protected function getCrlfIndent()
     {
-        return $this->getCrlf() . $this->getIndent();
+        return $this->getCrlf().$this->getIndent();
     }
 
     protected function getIndent($increment = 0)
@@ -152,7 +152,7 @@ abstract class FormatterPass
 
     protected function inspectToken($delta = 1)
     {
-        if (!isset($this->tkns[$this->ptr + $delta])) {
+        if (! isset($this->tkns[$this->ptr + $delta])) {
             return [null, null];
         }
 
@@ -161,7 +161,7 @@ abstract class FormatterPass
 
     protected function isShortArray()
     {
-        return !$this->leftTokenIs([
+        return ! $this->leftTokenIs([
             ST_BRACKET_CLOSE,
             ST_CURLY_CLOSE,
             ST_PARENTHESES_CLOSE,
@@ -260,7 +260,7 @@ abstract class FormatterPass
             if (T_WHITESPACE == $id || T_COMMENT == $id || T_DOC_COMMENT == $id) {
                 continue;
             }
-            if (!isset($countTokens[$id])) {
+            if (! isset($countTokens[$id])) {
                 $countTokens[$id] = 0;
             }
             ++$countTokens[$id];
@@ -283,7 +283,7 @@ abstract class FormatterPass
             list($id, $text) = $this->getToken($token);
             $this->ptr = $index;
             $this->cache = [];
-            if (!$touchedLn && T_WHITESPACE == $id && $this->hasLn($text)) {
+            if (! $touchedLn && T_WHITESPACE == $id && $this->hasLn($text)) {
                 $touchedLn = true;
             }
             if (isset($tknids[$id])) {
@@ -568,7 +568,7 @@ abstract class FormatterPass
         ++$ptr;
         for ($sizeOfTkns = sizeof($tkns); $ptr < $sizeOfTkns; ++$ptr) {
             $id = $tkns[$ptr][0];
-            if (!isset($skipIds[$id])) {
+            if (! isset($skipIds[$id])) {
                 break;
             }
         }
@@ -849,11 +849,11 @@ abstract class FormatterPass
 
     protected function setIndent($increment)
     {
-        if ($this->indentChar === " ") {
+        if ($this->indentChar === ' ') {
             $increment = $this->indentBlock * $increment;
         }
         $this->indent += $increment;
-        
+
         if ($this->indent < 0) {
             $this->indent = 0;
         }
@@ -878,7 +878,7 @@ abstract class FormatterPass
         if ('left' != $direction) {
             $direction = 'right';
         }
-        if (!$this->useCache) {
+        if (! $this->useCache) {
             return $this->{$direction.'tokenSubsetIsAtIdx'}($this->tkns, $this->ptr, $token, $ignoreList);
         }
 
@@ -1004,8 +1004,6 @@ abstract class FormatterPass
                 return $idx;
             }
         }
-
-        return;
     }
 
     private function calculateCacheKey($direction, $ignoreList)
@@ -1019,7 +1017,7 @@ abstract class FormatterPass
             return true;
         } elseif (is_array($token) && isset($foundToken[1]) && in_array($foundToken[0], $token)) {
             return true;
-        } elseif (is_array($token) && !isset($foundToken[1]) && in_array($foundToken, $token)) {
+        } elseif (is_array($token) && ! isset($foundToken[1]) && in_array($foundToken, $token)) {
             return true;
         } elseif (isset($foundToken[1]) && $foundToken[0] == $token) {
             return true;
@@ -1030,7 +1028,7 @@ abstract class FormatterPass
 
     private function resolveIgnoreList($ignoreList = [])
     {
-        if (!empty($ignoreList)) {
+        if (! empty($ignoreList)) {
             return array_flip($ignoreList);
         }
 
@@ -1039,7 +1037,7 @@ abstract class FormatterPass
 
     private function resolveTokenMatch($tkns, $idx, $token)
     {
-        if (!isset($tkns[$idx])) {
+        if (! isset($tkns[$idx])) {
             return false;
         }
 

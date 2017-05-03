@@ -53,7 +53,7 @@ final class SmartLnAfterCurlyOpen extends AdditionalPass
                             break;
                         }
                     }
-                    if ($foundLineBreak && !$hasLnAfter) {
+                    if ($foundLineBreak && ! $hasLnAfter) {
                         $this->appendCode($this->newLine);
                     }
                     $this->appendCode($stack);

@@ -9,7 +9,7 @@ class CurlyOpenNextLine extends FormatterPass implements FixerInterface
 {
     public function __construct()
     {
-        $this->indentChar = " ";
+        $this->indentChar = ' ';
     }
 
     public function candidate($source, $foundTokens)
@@ -53,7 +53,7 @@ class CurlyOpenNextLine extends FormatterPass implements FixerInterface
                     }
                     break;
                 case T_FUNCTION:
-                    if (!$this->leftTokenIs([T_DOUBLE_ARROW, T_RETURN, ST_EQUAL, ST_PARENTHESES_OPEN, ST_COMMA]) && $this->rightUsefulTokenIs([T_STRING, ST_REFERENCE])) {
+                    if (! $this->leftTokenIs([T_DOUBLE_ARROW, T_RETURN, ST_EQUAL, ST_PARENTHESES_OPEN, ST_COMMA]) && $this->rightUsefulTokenIs([T_STRING, ST_REFERENCE])) {
                         $this->appendCode($text);
                         $touchedLn = false;
                         while (list($index, $token) = each($this->tkns)) {
@@ -62,7 +62,7 @@ class CurlyOpenNextLine extends FormatterPass implements FixerInterface
                             if (T_WHITESPACE == $id && $this->hasLn($text)) {
                                 $touchedLn = true;
                             }
-                            if (ST_CURLY_OPEN === $id && !$touchedLn) {
+                            if (ST_CURLY_OPEN === $id && ! $touchedLn) {
                                 $this->appendCode($this->getCrlfIndent());
                                 prev($this->tkns);
                                 break;

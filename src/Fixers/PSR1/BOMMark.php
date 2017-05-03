@@ -16,7 +16,7 @@ class BOMMark extends FormatterPass implements FixerInterface
     {
         return substr($source, 0, 3) === self::BOM;
     }
-    
+
     public function format($source)
     {
         return substr($source, 3);

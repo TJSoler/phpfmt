@@ -25,7 +25,7 @@ final class SpaceBetweenMethods extends AdditionalPass
                     $this->appendCode($text);
                     $this->printUntil(ST_CURLY_OPEN);
                     $this->printCurlyBlock();
-                    if (!$this->rightTokenIs([ST_CURLY_CLOSE, ST_SEMI_COLON, ST_COMMA, ST_PARENTHESES_CLOSE])) {
+                    if (! $this->rightTokenIs([ST_CURLY_CLOSE, ST_SEMI_COLON, ST_COMMA, ST_PARENTHESES_CLOSE])) {
                         $this->appendCode($this->getCrlf());
                     }
                     break;

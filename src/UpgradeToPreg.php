@@ -37,8 +37,7 @@ final class UpgradeToPreg extends AdditionalPass
     {
         return;
         false !== stripos($source, 'ereg') ||
-        false !== stripos($source, 'split')
-        ;
+        false !== stripos($source, 'split');
     }
 
     public function format($source)
@@ -60,14 +59,14 @@ final class UpgradeToPreg extends AdditionalPass
             }
 
             $lctext = strtolower($text);
-            if (T_STRING == $id && !isset(self::$conversionTable[$lctext])) {
+            if (T_STRING == $id && ! isset(self::$conversionTable[$lctext])) {
                 continue;
             }
 
             $funcIdx = $this->ptr;
 
             $this->walkUntil(ST_PARENTHESES_OPEN);
-            if (!$this->rightUsefulTokenIs(T_CONSTANT_ENCAPSED_STRING)) {
+            if (! $this->rightUsefulTokenIs(T_CONSTANT_ENCAPSED_STRING)) {
                 continue;
             }
             $this->walkUntil(T_CONSTANT_ENCAPSED_STRING);

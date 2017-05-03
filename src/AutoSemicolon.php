@@ -76,7 +76,7 @@ final class AutoSemicolon extends AdditionalPass
                     break;
 
                 case T_WHITESPACE:
-                    if (!$this->hasLn($text)) {
+                    if (! $this->hasLn($text)) {
                         $this->appendCode($text);
                         continue;
                     }

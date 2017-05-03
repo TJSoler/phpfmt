@@ -22,7 +22,7 @@ final class MergeNamespaceWithOpenTag extends AdditionalPass
             $this->ptr = $index;
             switch ($id) {
                 case T_NAMESPACE:
-                    if ($this->leftTokenIs(T_OPEN_TAG) && !$this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
+                    if ($this->leftTokenIs(T_OPEN_TAG) && ! $this->rightUsefulTokenIs(T_NS_SEPARATOR)) {
                         $this->rtrimAndAppendCode($this->newLine.$text);
                         break 2;
                     }

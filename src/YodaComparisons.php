@@ -95,7 +95,7 @@ EOT;
                         $rightPureVariable &= $this->isPureVariable($rightScanId);
                     }
 
-                    if ($leftPureVariable && !$rightPureVariable) {
+                    if ($leftPureVariable && ! $rightPureVariable) {
                         $origLeftTokens = $leftTokens = implode('', array_map(function ($token) {
                             return isset($token[1]) ? $token[1] : $token;
                         }, array_slice($tkns, $leftmost, $left - $leftmost + 1)));
@@ -161,7 +161,7 @@ EOT;
                 if (T_VARIABLE == $id) {
                     $touchedVariable = true;
                 }
-                if (!$this->rightTokenSubsetIsAtIdx(
+                if (! $this->rightTokenSubsetIsAtIdx(
                     $tkns,
                     $ptr,
                     [T_STRING, T_VARIABLE, T_NS_SEPARATOR, T_OBJECT_OPERATOR, T_DOUBLE_COLON, ST_CURLY_OPEN, ST_PARENTHESES_OPEN, ST_BRACKET_OPEN, T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES]
@@ -185,12 +185,12 @@ EOT;
 
                     $stack .= $text;
 
-                    if (!$touchedVariable && T_VARIABLE == $id) {
+                    if (! $touchedVariable && T_VARIABLE == $id) {
                         $touchedVariable = true;
                     }
 
                     if (
-                        !$this->rightTokenSubsetIsAtIdx(
+                        ! $this->rightTokenSubsetIsAtIdx(
                             $tkns,
                             $ptr,
                             [T_STRING, T_VARIABLE, T_NS_SEPARATOR, T_OBJECT_OPERATOR, T_DOUBLE_COLON, ST_CURLY_OPEN, ST_PARENTHESES_OPEN, ST_BRACKET_OPEN, T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES]

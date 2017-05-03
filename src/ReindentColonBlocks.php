@@ -25,7 +25,7 @@ final class ReindentColonBlocks extends FormatterPass
             if (
                 T_ENDIF == $id || T_ELSEIF == $id ||
                 T_ENDFOR == $id || T_ENDFOREACH == $id || T_ENDWHILE == $id ||
-                (T_ELSE == $id && !$this->rightUsefulTokenIs(ST_CURLY_OPEN))
+                (T_ELSE == $id && ! $this->rightUsefulTokenIs(ST_CURLY_OPEN))
             ) {
                 $this->setIndent(-1);
             }
@@ -80,7 +80,7 @@ final class ReindentColonBlocks extends FormatterPass
     private function indentBlock()
     {
         $foundId = $this->printUntilAny([ST_COLON, ST_SEMI_COLON, ST_CURLY_OPEN]);
-        if (ST_COLON === $foundId && !$this->rightTokenIs([T_CLOSE_TAG])) {
+        if (ST_COLON === $foundId && ! $this->rightTokenIs([T_CLOSE_TAG])) {
             $this->setIndent(+1);
         }
     }

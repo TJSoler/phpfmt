@@ -3,13 +3,12 @@
 namespace Fmt\Fixers;
 
 use Fmt\FormatterPass;
-use Fmt\Fixers\FixerInterface;
 
 class ReindentSwitchBlocks extends FormatterPass implements FixerInterface
 {
     public function __construct()
     {
-        $this->indentChar = " ";
+        $this->indentChar = ' ';
     }
 
     public function candidate($source, $foundTokens)
@@ -37,7 +36,7 @@ class ReindentSwitchBlocks extends FormatterPass implements FixerInterface
                     $this->appendCode($text);
                     $this->setIndent(+1);
                     break;
-                
+
                 case T_BREAK:
                     $this->appendCode($text);
                     $this->setIndent(-1);
@@ -74,7 +73,7 @@ class ReindentSwitchBlocks extends FormatterPass implements FixerInterface
                     $this->appendCode($text);
                     if ($touchedSwitch) {
                         $touchedSwitch = false;
-                        $indentToken   = T_SWITCH;
+                        $indentToken = T_SWITCH;
                         $this->setIndent(+1);
                     }
                     $foundStack[] = $indentToken;
@@ -98,23 +97,24 @@ class ReindentSwitchBlocks extends FormatterPass implements FixerInterface
                             $this->setIndent(-1);
                             $text = str_replace(
                                 $this->newLine,
-                                $this->newLine . $this->getIndent(),
+                                $this->newLine.$this->getIndent(),
                                 $text
                             );
                             $this->setIndent(+1);
                         } else {
                             $text = str_replace(
                                 $this->newLine,
-                                $this->newLine . $this->getIndent(),
+                                $this->newLine.$this->getIndent(),
                                 $text
                             );
                         }
                     }
-                    
+
                     $this->appendCode($text);
                     break;
             }
         }
+
         return $this->code;
     }
 }

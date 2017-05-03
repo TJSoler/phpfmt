@@ -75,7 +75,7 @@ class ModifierVisibilityStaticOrder extends FormatterPass implements FixerInterf
                     $this->appendCode($text);
                     break;
                 case T_WHITESPACE:
-                    if (!$skipWhitespaces) {
+                    if (! $skipWhitespaces) {
                         $this->appendCode($text);
                     }
                     break;
@@ -89,7 +89,7 @@ class ModifierVisibilityStaticOrder extends FormatterPass implements FixerInterf
                     break;
                 case T_FINAL:
                 case T_ABSTRACT:
-                    if (!$this->rightTokenIs([T_CLASS])) {
+                    if (! $this->rightTokenIs([T_CLASS])) {
                         $finalOrAbstract = $text;
                         $skipWhitespaces = true;
                         break;
@@ -97,11 +97,11 @@ class ModifierVisibilityStaticOrder extends FormatterPass implements FixerInterf
                     $this->appendCode($text);
                     break;
                 case T_STATIC:
-                    if (!is_null($visibility)) {
+                    if (! is_null($visibility)) {
                         $static = $text;
                         $skipWhitespaces = true;
                         break;
-                    } elseif (!$this->rightTokenIs([T_VARIABLE, T_DOUBLE_COLON]) && !$this->leftTokenIs([T_NEW])) {
+                    } elseif (! $this->rightTokenIs([T_VARIABLE, T_DOUBLE_COLON]) && ! $this->leftTokenIs([T_NEW])) {
                         $static = $text;
                         $skipWhitespaces = true;
                         break;
@@ -134,7 +134,7 @@ class ModifierVisibilityStaticOrder extends FormatterPass implements FixerInterf
                         $this->appendCode($visibility.$this->getSpace());
                     } elseif (
                         $hasFoundClassOrInterface &&
-                        !$this->leftTokenIs([T_DOUBLE_ARROW, T_RETURN, ST_EQUAL, ST_COMMA, ST_PARENTHESES_OPEN])
+                        ! $this->leftTokenIs([T_DOUBLE_ARROW, T_RETURN, ST_EQUAL, ST_COMMA, ST_PARENTHESES_OPEN])
                     ) {
                         $this->appendCode('public'.$this->getSpace());
                     }

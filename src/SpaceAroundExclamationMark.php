@@ -29,7 +29,7 @@ final class SpaceAroundExclamationMark extends AdditionalPass
                     $this->appendCode(
                         $this->getSpace(
                             (
-                                !$this->leftUsefulTokenIs([
+                                ! $this->leftUsefulTokenIs([
                                     T_BOOLEAN_AND, T_BOOLEAN_OR,
                                     T_LOGICAL_AND, T_LOGICAL_OR, T_LOGICAL_XOR,
                                 ])
@@ -37,7 +37,7 @@ final class SpaceAroundExclamationMark extends AdditionalPass
                             )
                         )
                         .$text.
-                        $this->getSpace(!$this->rightUsefulTokenIs([
+                        $this->getSpace(! $this->rightUsefulTokenIs([
                             T_BOOLEAN_AND, T_BOOLEAN_OR,
                             T_LOGICAL_AND, T_LOGICAL_OR, T_LOGICAL_XOR,
                         ]))

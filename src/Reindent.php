@@ -115,7 +115,7 @@ final class Reindent extends FormatterPass
                     $hasLn = $this->hasLn($text);
                     if ($hasLn) {
                         $isNextCurlyParenBracketClose = $this->rightTokenIs([T_CASE, T_DEFAULT, ST_CURLY_CLOSE, ST_PARENTHESES_CLOSE, ST_BRACKET_CLOSE]);
-                        if (!$isNextCurlyParenBracketClose) {
+                        if (! $isNextCurlyParenBracketClose) {
                             $text = str_replace($this->newLine, $this->newLine.$this->getIndent(), $text);
                         } elseif ($isNextCurlyParenBracketClose) {
                             $this->setIndent(-1);

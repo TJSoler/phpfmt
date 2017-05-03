@@ -39,7 +39,7 @@ final class SpaceAroundParentheses extends AdditionalPass
                             )
                         )
                         .$text.
-                        $this->getSpace(!$this->rightTokenIs([
+                        $this->getSpace(! $this->rightTokenIs([
                             T_WHITESPACE, ST_PARENTHESES_CLOSE,
                         ]))
                     );
@@ -51,7 +51,7 @@ final class SpaceAroundParentheses extends AdditionalPass
                     $this->appendCode(
                         $this->getSpace(
                             (
-                                !$this->leftTokenIs(
+                                ! $this->leftTokenIs(
                                     [
                                         ST_PARENTHESES_OPEN,
                                     ]

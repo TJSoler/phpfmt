@@ -2,7 +2,7 @@
 
 namespace Fmt\FixerGroups;
 
-interface FixerGroupInterface {
-
+interface FixerGroupInterface
+{
     // public function setFixers($Fixers)
 }

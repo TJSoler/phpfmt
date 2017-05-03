@@ -21,19 +21,19 @@ class AutoPreincrement extends AdditionalPass
             $tokenRef = &$this->tkns[$this->ptr];
 
             $id = $token[0];
-            if (!(T_INC == $id || T_DEC == $id)) {
+            if (! (T_INC == $id || T_DEC == $id)) {
                 continue;
             }
 
             if (
-                !$this->leftUsefulTokenIs([
+                ! $this->leftUsefulTokenIs([
                     ST_BRACKET_CLOSE,
                     ST_CURLY_CLOSE,
                     T_STRING,
                     T_VARIABLE,
                 ])
                 ||
-                !$this->rightUsefulTokenIs([
+                ! $this->rightUsefulTokenIs([
                     ST_SEMI_COLON,
                     ST_PARENTHESES_CLOSE,
                 ])
@@ -99,7 +99,7 @@ EOT;
         }
 
         if (T_DOUBLE_COLON == $idLeftToken) {
-            if (!$this->leftUsefulTokenIs([T_STRING])) {
+            if (! $this->leftUsefulTokenIs([T_STRING])) {
                 $this->findVariableLeftEdge();
 
                 return;
@@ -108,8 +108,6 @@ EOT;
             $this->refWalkBackUsefulUntil($this->tkns, $this->ptr, [T_NS_SEPARATOR, T_STRING]);
             $this->ptr = $this->rightUsefulTokenIdx();
         }
-
-        return;
     }
 
     private function skipBlocks()
@@ -127,6 +125,6 @@ EOT;
             }
 
             $id = $this->tkns[$this->ptr][0];
-        } while (!(ST_DOLLAR == $id || T_VARIABLE == $id));
+        } while (! (ST_DOLLAR == $id || T_VARIABLE == $id));
     }
 }

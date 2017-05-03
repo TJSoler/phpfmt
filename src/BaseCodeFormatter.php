@@ -254,29 +254,28 @@ abstract class BaseCodeFormatter
         if (! defined('ST_BITWISE_XOR')) {
             define('ST_BITWISE_XOR', '^');
         }
-        if (!defined('T_POW')) {
+        if (! defined('T_POW')) {
             define('T_POW', '**');
         }
-        if (!defined('T_POW_EQUAL')) {
+        if (! defined('T_POW_EQUAL')) {
             define('T_POW_EQUAL', '**=');
         }
-        if (!defined('T_YIELD')) {
+        if (! defined('T_YIELD')) {
             define('T_YIELD', 'yield');
         }
-        if (!defined('T_FINALLY')) {
+        if (! defined('T_FINALLY')) {
             define('T_FINALLY', 'finally');
         }
-        if (!defined('T_SPACESHIP')) {
+        if (! defined('T_SPACESHIP')) {
             define('T_SPACESHIP', '<=>');
         }
-        if (!defined('T_COALESCE')) {
+        if (! defined('T_COALESCE')) {
             define('T_COALESCE', '??');
         }
 
         define('ST_PARENTHESES_BLOCK', 'ST_PARENTHESES_BLOCK');
         define('ST_BRACKET_BLOCK', 'ST_BRACKET_BLOCK');
         define('ST_CURLY_BLOCK', 'ST_CURLY_BLOCK');
-
 
         $this->passes['AddMissingCurlyBraces'] = new AddMissingCurlyBraces();
         $this->passes['EliminateDuplicatedEmptyLines'] = new EliminateDuplicatedEmptyLines();
@@ -314,7 +313,7 @@ abstract class BaseCodeFormatter
     /**
      * Overrides the default configuration with the configuration
      * passed to the command from the command line. This should
-     * override even if whe have selected psr2 with 4 spaces
+     * override even if whe have selected psr2 with 4 spaces.
      *
      * @param      array  $options  The options
      */
@@ -328,11 +327,11 @@ abstract class BaseCodeFormatter
     public function enablePass($pass)
     {
         $args = func_get_args();
-        if (!isset($args[1])) {
+        if (! isset($args[1])) {
             $args[1] = null;
         }
 
-        if (!class_exists($pass)) {
+        if (! class_exists($pass)) {
             sprintf("Class doesn't exist: $pass");
             $passName = sprintf('ExternalPass%s', $pass);
             $passes = array_reverse($this->passes, true);
