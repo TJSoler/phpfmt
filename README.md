@@ -21,6 +21,8 @@ This branch should be UP until every test is been written.
 ## TODO:
 - Move help from the actual fixer class to a FixerHelp class?
 - Move the `--help-pass` option to a new `help` subcommand? `phpfmt help OrderAndRemoveUseClauses`
+- Create proper docs.
+- Create different report types. To be consumed by machines, automation, CLI, or to web.
 
 ## Before it is considered stable
 - Finish cleaning up _phpfmt.php_.
