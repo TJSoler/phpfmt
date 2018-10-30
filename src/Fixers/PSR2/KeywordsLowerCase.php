@@ -79,6 +79,7 @@ class KeywordsLowerCase extends FormatterPass implements FixerInterface
         'xor',
     ];
    
+    // every token is candidate?
     public function candidate($source, $foundTokens)
     {
         return true;
